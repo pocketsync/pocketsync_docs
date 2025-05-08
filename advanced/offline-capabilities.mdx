@@ -1,0 +1,45 @@
+---
+title: Offline capabilities
+description: "Strategies and best practices for building offline-first applications with PocketSync"
+---
+
+## Understanding offline-first
+
+Offline-first is an approach to application development that prioritizes the offline experience, ensuring your app works seamlessly regardless of network connectivity. PocketSync is built with offline-first principles at its core.
+
+### Key Principles
+
+<CardGroup cols={2}>
+  <Card title="Local-First Data" icon="database">
+    Store all essential data locally and treat the local database as the primary source of truth.
+  </Card>
+  <Card title="Optimistic UI Updates" icon="bolt">
+    Apply UI changes immediately without waiting for server confirmation, then reconcile later.
+  </Card>
+  <Card title="Background Synchronization" icon="arrows-rotate">
+    Sync data in the background when connectivity is restored without user intervention.
+  </Card>
+  <Card title="Conflict Resolution" icon="code-merge">
+    Handle conflicts that arise when the same data is modified in different offline states.
+  </Card>
+</CardGroup>
+## Testing offline capabilities
+
+### Manual testing
+
+1. **Airplane mode test**: Toggle airplane mode on and off to simulate connectivity changes and verify data syncs when connection is restored
+2. **Slow network test**: Use network throttling tools to simulate poor connectivity and ensure the app remains responsive
+3. **Extended offline test**: Keep the app offline for several days, make multiple changes, then reconnect to verify all changes synchronize properly
+
+## Best practices
+
+Building offline-first applications with PocketSync enables your users to have a seamless experience regardless of network conditions. By implementing these best practices, you can create applications that are resilient, responsive, and user-friendly:
+
+1. **Design for offline first**: Assume users will frequently be offline and design your app's workflow accordingly
+2. **Implement optimistic UI**: Update the interface immediately without waiting for server confirmation
+3. **Handle conflicts intelligently**: Choose appropriate conflict resolution strategies for different data types
+4. **Test thoroughly**: Simulate various network conditions to ensure your app functions reliably in all scenarios
+
+<Card title="Learn more about conflict resolution" icon="code-merge" href="/core-concepts/conflict-resolution">
+  Dive deeper into how PocketSync handles data conflicts
+</Card>

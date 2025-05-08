@@ -5,7 +5,7 @@
   "colors": {
     "primary": "#0066FF",
     "light": "#3385FF",
-    "dark": "#004DC2"
+    "dark": "#0C111D"
   },
   "favicon": "/favicon.svg",
   "logo": {
@@ -33,6 +33,11 @@
           "anchor": "Web console",
           "href": "https://pocketsync.dev",
           "icon": "globe"
+        },
+        {
+          "anchor": "Technical documentation",
+          "href": "https://deepwiki.com/pocketsync/pocketsync_flutter",
+          "icon": "code"
         }
       ]
     },
@@ -48,26 +53,38 @@
             ]
           },
           {
-            "group": "Usage",
-            "pages": [
-              "usage/pocketsync",
-              "usage/pocketsync-database"
-            ]
-          },
-          {
             "group": "Core concepts",
             "pages": [
-              "core-concepts/offline-first",
-              "core-concepts/sync-engine",
+              "core-concepts/how-it-works",
               "core-concepts/conflict-resolution"
             ]
           },
           {
-            "group": "Architecture",
+            "group": "SDK Reference",
             "pages": [
-              "architecture/overview",
-              "architecture/architecture",
-              "architecture/server-data-cleanup"
+              "sdk/configuration",
+              "sdk/methods"
+            ]
+          },
+          {
+            "group": "Database",
+            "pages": [
+              "database/usage",
+              "database/pocket-sync-database"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "advanced/custom-conflict-resolution",
+              "advanced/security",
+              "advanced/offline-capabilities"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "troubleshooting"
             ]
           }
         ]

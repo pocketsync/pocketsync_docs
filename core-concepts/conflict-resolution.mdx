@@ -1,181 +1,83 @@
 ---
-title: "Conflict Resolution"
-description: "Understanding how PocketSync handles data conflicts and maintains consistency"
+title: Conflict resolution
+description: "How PocketSync handles conflicts"
 ---
 
-## Understanding Conflicts
+In distributed systems like PocketSync, conflicts occur when multiple devices modify the same database record without immediate synchronization. The MergeEngine component is responsible for detecting these conflicts and resolving them according to configurable strategies.
 
-In a distributed system like PocketSync, conflicts can occur when multiple devices modify the same data while offline. PocketSync implements a robust conflict resolution system to maintain data consistency across all devices.
+```mermaid
+flowchart TD
+    LC[Local Changes]
+    RC[Remote Changes]
+    SW[SyncWorker]
+    ME[MergeEngine]
+    DB[Database]
+    App[Application]
 
-## Default Strategy: Last Write Wins
+    LC --> SW
+    RC --> SW
+    SW --> ME
 
-By default, PocketSync uses a "Last Write Wins" (LWW) strategy for conflict resolution:
+    subgraph "Conflict Resolution Process"
+        ME
+    end
 
-1. **Timestamp-Based resolution**
-   - Each change is timestamped when created
-   - When conflicts occur, the most recent change prevails
-   - Ensures consistent conflict resolution across devices
-
-2. **Version tracking**
-   - Each record maintains a version number
-   - Versions increment with each modification
-   - Helps in detecting concurrent modifications
-
-## Custom conflict resolution
-
-### Configuration
-
-When initializing PocketSync, you can configure the conflict resolution strategy:
-
-```dart
-// Initialize with custom conflict resolution
-final options = PocketSyncOptions(
-  projectId: projectId,
-  authToken: authToken,
-  serverUrl: serverUrl,
-  conflictResolver: ConflictResolver(
-    strategy: ConflictResolutionStrategy.custom,
-    customResolver: (tableName, localRow, remoteRow) {
-      // Your custom resolution logic here
-      return remoteRow;
-    },
-  ),
-);
-
-// Available strategies:
-// - ConflictResolutionStrategy.ignore (default)
-// - ConflictResolutionStrategy.serverWins
-// - ConflictResolutionStrategy.clientWins
-// - ConflictResolutionStrategy.custom
+    ME -->|Resolved Changes| DB
+    ME -->|Conflict Notification| App
 ```
 
-### Implementing Custom Resolution
+## Conflict detection
+A conflict is detected when both the local device and the server have changes for the same record. The MergeEngine identifies conflicts by grouping changes by their unique record identifier (table name + record ID).
 
-```dart
-class CustomConflictResolver extends ConflictResolver {
-  @override
-  Future<Map<String, dynamic>> resolveConflict(
-    String tableName,
-    Map<String, dynamic> localData,
-    Map<String, dynamic> remoteData,
-  ) async {
-    if (tableName == 'todos') {
-      // Custom resolution logic for todos
-      return {
-        ...remoteData,
-        'title': '${localData['title']} (merged)',
-        'updated_at': DateTime.now().millisecondsSinceEpoch,
-      };
-    }
-    return remoteData; // Default to LWW for other tables
-  }
-}
+```mermaid
+flowchart TB
+    subgraph "Changes from Different Sources"
+        LC[Local Changes]
+        RC[Remote Changes]
+    end
+    
+    subgraph "Conflict Detection"
+        Group[Group by record ID]
+        Check{Multiple changes<br>for same record?}
+        Conflict[Conflict Detected]
+        NoConflict[No Conflict]
+        Resolution[Apply Resolution Strategy]
+        Direct[Apply Change Directly]
+    end
+    
+    LC --> Group
+    RC --> Group
+    Group --> Check
+    Check -->|Yes| Conflict
+    Check -->|No| NoConflict
+    Conflict --> Resolution
+    NoConflict --> Direct
 ```
 
+## Conflict resolution strategies
+PocketSync supports four different strategies for resolving conflicts, defined in ConflictResolutionStrategy:
+
+| Strategy | Description | Use Case |
+|----------|-------------|----------|
+| `lastWriteWins` (Default) | Most recent change based on timestamp wins | General purpose, when recent changes are typically more relevant |
+| `serverWins` | Remote changes always take precedence | When the server is considered the source of truth |
+| `clientWins` | Local changes always take precedence | When local user actions should override server changes |
+| `custom` | Uses a developer-provided resolver function | Complex scenarios requiring application-specific logic |
 
 
-### Resolution strategies
+## Best practices
 
-1. **Field-Level Merging**
-   ```dart
-   // Merge specific fields from both versions
-   return {
-     ...remoteData,
-     'description': '${localData['description']}\n${remoteData['description']}',
-   };
-   ```
+When working with PocketSync's conflict resolution:
 
-2. **Business logic based**
-   ```dart
-   // Apply business rules for resolution
-   return {
-     ...remoteData,
-     'quantity': max(localData['quantity'], remoteData['quantity']),
-   };
-   ```
+- Choose the appropriate strategy for your application's needs
+- Use custom resolution for complex business logic requirements
 
-3. **User interaction**
-   ```dart
-   // Prompt user for resolution
-   final userChoice = await showConflictDialog(
-     localData: localData,
-     remoteData: remoteData,
-   );
-   return userChoice == 'local' ? localData : remoteData;
-   ```
+## Limitations
 
-## Conflict prevention
+The current conflict resolution system has these limitations:
 
-### Best practices
+- Conflicts are resolved at the record level, not at the field level
+- The default last-write-wins strategy depends on accurate device timestamps
+- Conflicts between delete and update operations always follow the configured strategy
 
-1. **Data structure design**
-   ```dart
-   // Use composite keys to prevent conflicts
-   await db.execute('''
-     CREATE TABLE shared_notes (
-       id TEXT,
-       user_id TEXT,
-       content TEXT,
-       updated_at INTEGER,
-       PRIMARY KEY (id, user_id)
-     )
-   ''');
-   ```
-
-2. **Optimistic locking**
-   ```dart
-   // Check version before update
-   final result = await db.update(
-     'items',
-     newData,
-     where: 'id = ? AND version = ?',
-     whereArgs: [itemId, currentVersion],
-   );
-   if (result == 0) {
-     // Handle concurrent modification
-   }
-   ```
-
-3. **Atomic operations**
-   ```dart
-   // Use transactions for related changes
-   await db.transaction((txn) async {
-     await txn.update('orders', {'status': 'completed'});
-     await txn.insert('order_history', {'event': 'completed'});
-   });
-   ```
-## Edge cases
-
-1. **Cascading updates**
-   - Related records are updated together
-   - Maintains referential integrity
-   - Preserves data consistency
-
-2. **Concurrent modifications**
-   - Data edited by multiple devices
-   - Version tracking prevents data loss
-   - Clear resolution hierarchy
-
-3. **Network partitions**
-   - Temporary network splits
-   - Eventual consistency
-   - Robust conflict handling
-
-## Best practices summary
-
-1. **Design for conflicts**
-   - Plan data structure carefully
-   - Use appropriate primary keys
-   - Consider concurrent access patterns
-
-2. **Implement proper handling**
-   - Choose appropriate resolution strategies
-   - Test conflict scenarios thoroughly
-   - Monitor conflict resolution
-
-3. **User experience**
-   - Provide clear feedback
-   - Offer resolution options when appropriate
-   - Maintain data integrity
-
-By following these guidelines and implementing appropriate conflict resolution strategies, you can ensure your application handles data conflicts gracefully while maintaining a consistent user experience.
+For more advanced conflict resolution needs, see [custom conflict resolution](/advanced/custom-conflict-resolution).

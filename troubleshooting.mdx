@@ -1,0 +1,228 @@
+---
+title: Troubleshooting
+description: "Common issues, error codes, and solutions for PocketSync"
+---
+
+## Common issues and solutions
+
+### Connection issues
+
+<AccordionGroup>
+  <Accordion title="Cannot connect to PocketSync server">
+    **Symptoms**: 
+    - Sync operations fail with network errors
+    - App shows offline status even when online
+    
+    **Possible causes**:
+    - Invalid server URL
+    - Network connectivity issues
+    - Server is down or unreachable
+    
+    **Solutions**:
+    1. Verify your server URL in the PocketSyncOptions
+    2. Check your device's network connection
+    3. Verify that your auth token is valid
+    4. Check the PocketSync status page for any outages
+  </Accordion>
+  
+  <Accordion title="Authentication failures">
+    **Symptoms**:
+    - Sync operations fail with 401 or 403 errors
+    - Cannot initialize PocketSync
+    
+    **Possible causes**:
+    - Invalid or expired auth token
+    - Invalid project ID
+    - User ID not set before starting sync
+    
+    **Solutions**:
+    1. Verify your auth token and project ID in the PocketSync console
+    2. Ensure you've called `setUserId()` before starting sync
+    3. Check if your token has the necessary permissions
+  </Accordion>
+  
+  <Accordion title="Sync starts but no data is transferred">
+    **Symptoms**:
+    - PocketSync initializes without errors
+    - No data is synchronized between devices
+    
+    **Possible causes**:
+    - Incorrect table configuration
+    - Data doesn't meet sync criteria
+    - Sync process is stopped or paused
+    
+    **Solutions**:
+    1. Verify that your tables are properly configured for sync
+    2. Check if `PocketSync.instance.start()` was called
+    3. Inspect logs with verbose mode enabled
+    4. Verify that data changes are being detected
+  </Accordion>
+</AccordionGroup>
+
+### Data Synchronization Issues
+
+<AccordionGroup>
+  <Accordion title="Data conflicts not resolving correctly">
+    **Symptoms**:
+    - Unexpected data values after sync
+    - Different data appears on different devices
+    
+    **Possible causes**:
+    - Conflict resolution strategy not appropriate for your use case
+    - Custom resolver function has bugs
+    
+    **Solutions**:
+    1. Review your conflict resolution strategy
+    2. Test your custom resolver with different conflict scenarios
+    3. Consider using a different built-in strategy
+    4. Enable verbose logging to see conflict details
+  </Accordion>
+  
+  <Accordion title="Data loss during synchronization">
+    **Symptoms**:
+    - Records disappear after sync
+    - Fields are reset to default values
+    
+    **Possible causes**:
+    - Improper conflict resolution
+    - Database schema mismatch
+    - Incorrect data types
+    
+    **Solutions**:
+    1. Verify schema consistency across devices
+    2. Check for proper data type handling
+    3. Implement a custom conflict resolver that preserves data
+    4. Restore from backup if available
+  </Accordion>
+  
+  <Accordion title="Sync is slow or consuming excessive resources">
+    **Symptoms**:
+    - Sync operations take a long time
+    - High battery or network usage
+    
+    **Possible causes**:
+    - Large dataset
+    - Frequent changes triggering many sync operations
+    - Inefficient change tracking
+    
+    **Solutions**:
+    1. Adjust sync frequency and debounce settings
+    2. Optimize database queries and change detection
+    3. Consider syncing only essential data
+    4. Implement data pagination or chunking for large datasets
+  </Accordion>
+</AccordionGroup>
+
+## Debugging tips
+
+### Enable verbose logging
+
+Enable detailed logging to help diagnose issues:
+
+```dart
+final options = PocketSyncOptions(
+  // ... other options
+  verbose: true,
+);
+```
+
+### Inspect database
+
+Directly inspect the database to verify data integrity:
+
+```dart
+final db = PocketSync.instance.database;
+final records = await db.query('your_table');
+print('Records: $records');
+```
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How do I reset sync state if things go wrong?">
+    If you need to reset the sync state, you can use the `resetChangeTracking` method:
+    
+    ```dart
+    await PocketSync.instance.resetChangeTracking();
+    ```
+    
+    This will clear all pending changes and reset the sync state. Note that this won't delete your data, just the sync metadata.
+  </Accordion>
+  
+  <Accordion title="What happens if a device is offline for an extended period?">
+    PocketSync is designed to handle extended offline periods. When a device comes back online, it will:
+    
+    1. Upload any local changes that occurred while offline
+    2. Download remote changes that occurred during the offline period
+    3. Resolve any conflicts according to your configured strategy
+    
+    For very long offline periods (weeks/months), you might want to consider a full resync by calling `resetChangeTracking()` followed by `start()`.
+  </Accordion>
+  
+  <Accordion title="How can I verify that sync is working correctly?">
+    To verify sync is working:
+    
+    1. Enable verbose logging
+    2. Make changes on one device and check that they appear on another
+    3. Monitor the sync status using the `syncStatus` stream
+    4. Check the server logs in the PocketSync console
+    
+    You can also implement a simple UI indicator to show sync status to users.
+  </Accordion>
+  
+  <Accordion title="Can I sync only specific tables or records?">
+    Yes, you can configure which tables to sync when initializing PocketSync:
+    
+    ```dart
+    final databaseOptions = PocketSyncDatabaseOptions(
+      tables: [
+        TableDefinition(
+          name: 'todos',
+          syncEnabled: true,
+          // other options
+        ),
+        TableDefinition(
+          name: 'settings',
+          syncEnabled: false, // This table won't sync
+          // other options
+        ),
+      ],
+    );
+    ```
+    
+    For more granular control, you can implement custom logic to determine which records to sync.
+  </Accordion>
+  
+  <Accordion title="How do I handle schema migrations with PocketSync?">
+    When changing your database schema:
+    
+    1. Update your table definitions
+    2. Increment your database version
+    3. Provide migration scripts
+    
+    ```dart
+    final databaseOptions = PocketSyncDatabaseOptions(
+      version: 2, // Increment this when schema changes
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion == 1 && newVersion == 2) {
+          await db.execute('ALTER TABLE todos ADD COLUMN priority INTEGER');
+        }
+      },
+      // other options
+    );
+    ```
+    
+    Always test migrations thoroughly before deploying to production.
+  </Accordion>
+</AccordionGroup>
+
+## Still need help?
+
+If you're still experiencing issues:
+
+1. Check our [GitHub repository](https://github.com/pocketsync/pocketsync_flutter) for known issues
+2. Contact us at hello@pocketsync.dev
+
+<Card title="Report a bug" icon="bug" href="https://github.com/pocketsync/pocketsync_flutter/issues/new">
+  Help us improve by reporting bugs and issues you encounter
+</Card>

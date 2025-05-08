@@ -1,0 +1,58 @@
+---
+title: Methods
+description: "Methods for PocketSync"
+---
+
+## PocketSync
+
+### initialize
+
+```dart
+final pocketSync = await PocketSync.initialize(
+  options: PocketSyncOptions(
+    projectId: 'your-project-id',
+    authToken: 'your-auth-token',
+    serverUrl: 'https://api.pocketsync.dev',
+    changeLogRetentionDays: 30,
+    syncExistingData: true,
+    conflictResolutionStrategy: ConflictResolutionStrategy.lastWriteWins,
+    customResolver: null,
+    verbose: false,
+  ),
+  dbPath: dbPath,
+  databaseOptions: databaseOptions,
+);
+```
+
+### setUserId
+
+```dart
+await PocketSync.instance.setUserId(userId: 'user-123');
+```
+
+### Start sync
+
+```dart
+await PocketSync.instance.start();
+```
+
+### Force sync
+
+```dart
+await PocketSync.instance.scheduleSync();
+```
+
+### Stop sync
+
+```dart
+await PocketSync.instance.stop();
+```
+
+### Reset change tracking
+
+```dart
+await PocketSync.instance.reset();
+```
+
+
+

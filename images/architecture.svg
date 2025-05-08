@@ -1,66 +1,287 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg" version="1.1">
- <rect width="100%" height="100%" fill="white"/>
- <defs>
-  <marker orient="auto" refY="3.5" refX="9" markerHeight="7" markerWidth="10" id="arrowhead">
-   <polygon id="svg_1" fill="#666" points="0 0, 10 3.5, 0 7"/>
-  </marker>
- </defs>
- <!-- Device 1 (Origin) -->
- <!-- Server -->
- <!-- Device 2 -->
- <!-- Flow Arrows -->
- <!-- Device 1 to Server -->
- <!-- Server to Device 2 -->
- <!-- Legend -->
- <g>
-  <title>Layer 1</title>
-  <g id="svg_2">
-   <rect id="svg_3" stroke-width="2" stroke="#666" fill="#f0f0f0" rx="10" height="200" width="200" y="52" x="33"/>
-   <text id="svg_4" font-weight="bold" font-size="14" font-family="Arial" text-anchor="middle" y="82" x="133">Device 1 (Origin)</text>
-   <!-- Local Components -->
-   <rect id="svg_5" stroke="#2e7d32" fill="#a5d6a7" rx="5" height="30" width="160" y="102" x="53"/>
-   <text id="svg_6" font-size="12" font-family="Arial" text-anchor="middle" y="122" x="133">PocketSyncDatabase</text>
-   <rect id="svg_7" stroke="#1976d2" fill="#90caf9" rx="5" height="30" width="160" y="142" x="53"/>
-   <text id="svg_8" font-size="12" font-family="Arial" text-anchor="middle" y="162" x="133">ChangesProcessor</text>
-   <rect id="svg_9" stroke="#f57c00" fill="#ffcc80" rx="5" height="30" width="160" y="182" x="53"/>
-   <text id="svg_10" font-size="12" font-family="Arial" text-anchor="middle" y="202" x="133">SyncTaskQueue</text>
-  </g>
-  <g id="svg_11">
-   <rect id="svg_12" stroke-width="2" stroke="#666" fill="#e3f2fd" rx="10" height="250" width="200" y="100" x="300"/>
-   <text id="svg_13" font-weight="bold" font-size="14" font-family="Arial" text-anchor="middle" y="130" x="400">PocketSync Server</text>
-   <!-- Server Components -->
-   <rect id="svg_14" stroke="#0288d1" fill="#81d4fa" rx="5" height="30" width="160" y="150" x="320"/>
-   <text id="svg_15" font-size="12" font-family="Arial" text-anchor="middle" y="170" x="400">Change Receiver</text>
-   <rect id="svg_16" stroke="#512da8" fill="#b39ddb" rx="5" height="30" width="160" y="190" x="320"/>
-   <text id="svg_17" font-size="12" font-family="Arial" text-anchor="middle" y="210" x="400">Conflict Resolution</text>
-   <rect id="svg_18" stroke="#303f9f" fill="#9fa8da" rx="5" height="30" width="160" y="230" x="320"/>
-   <text id="svg_19" font-size="12" font-family="Arial" text-anchor="middle" y="250" x="400">Change Broadcaster</text>
-   <rect id="svg_20" stroke="#c62828" fill="#ef9a9a" rx="5" height="30" width="160" y="270" x="320"/>
-   <text id="svg_21" font-size="12" font-family="Arial" text-anchor="middle" y="290" x="400">WebSocket Manager</text>
-  </g>
-  <g id="svg_22">
-   <rect id="svg_23" stroke-width="2" stroke="#666" fill="#f0f0f0" rx="10" height="200" width="200" y="58" x="583"/>
-   <text id="svg_24" font-weight="bold" font-size="14" font-family="Arial" text-anchor="middle" y="88" x="683">Device 2</text>
-   <!-- Local Components -->
-   <rect id="svg_25" stroke="#2e7d32" fill="#a5d6a7" rx="5" height="30" width="160" y="108" x="603"/>
-   <text id="svg_26" font-size="12" font-family="Arial" text-anchor="middle" y="128" x="683">PocketSyncDatabase</text>
-   <rect id="svg_27" stroke="#1976d2" fill="#90caf9" rx="5" height="30" width="160" y="148" x="603"/>
-   <text id="svg_28" font-size="12" font-family="Arial" text-anchor="middle" y="168" x="683">ChangesProcessor</text>
-   <rect id="svg_29" stroke="#f57c00" fill="#ffcc80" rx="5" height="30" width="160" y="188" x="603"/>
-   <text id="svg_30" font-size="12" font-family="Arial" text-anchor="middle" y="208" x="683">SyncTaskQueue</text>
-  </g>
-  <path id="svg_31" fill="none" marker-end="url(#arrowhead)" stroke-width="2" stroke="#666" d="m233,150l66,0"/>
-  <text id="svg_32" font-size="10" font-family="Arial" y="139" x="249">Changes</text>
-  <path id="svg_33" fill="none" marker-end="url(#arrowhead)" stroke-width="2" stroke="#666" d="m498,150l86,0"/>
-  <text id="svg_34" font-size="10" font-family="Arial" y="140" x="525">Updates</text>
-  <g id="svg_35">
-   <text id="svg_36" font-weight="bold" font-size="14" font-family="Arial" y="400" x="50">Flow Description:</text>
-   <text id="svg_37" font-size="12" font-family="Arial" y="430" x="50">1. Local changes captured by PocketSyncDatabase</text>
-   <text id="svg_38" font-size="12" font-family="Arial" y="450" x="50">2. ChangesProcessor prepares data for sync</text>
-   <text id="svg_39" font-size="12" font-family="Arial" y="470" x="50">3. SyncTaskQueue manages sync operations</text>
-   <text id="svg_40" font-size="12" font-family="Arial" y="490" x="50">4. Server processes and resolves conflicts</text>
-   <text id="svg_41" font-size="12" font-family="Arial" y="510" x="50">5. Changes broadcast to connected devices</text>
-   <text id="svg_42" font-size="12" font-family="Arial" y="530" x="50">6. Receiving devices process and apply updates</text>
-  </g>
- </g>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1276.4990772998315 449.5838650555015"
+    width="1276.4990772998315" height="449.5838650555015"><!-- svg-source:excalidraw -->
+    <metadata></metadata>
+    <defs>
+        <symbol id="image-145c2da497f76fce24e50c87b9b0b1ff46eaca6a">
+            <image
+                href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDA2IiBoZWlnaHQ9IjcwIiB2aWV3Qm94PSIwIDAgNDA2IDcwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMzQuOTM0OCAyMi40NjYzQzM1Ljc3ODEgMjIuNTIzMSAzNi4zOTU1IDIyLjY2NDMgMzcuMTI1OSAyMy4wODI1QzM5Ljc3MzQgMjQuNTk4IDQxLjgzMDggMjYuOTcyOSA0NC4xMzY5IDI4Ljk0MjRDNDYuMDE0NiAzMC41NDUxIDQ4LjAzNjYgMzEuOTg0OSA0OS44ODM2IDMzLjYyMjdDNTEuNTEwNyAzNS4wNjUyIDUzLjAwNTUgMzYuODYxMSA1My4wNTU3IDM5LjE0ODJDNTMuMTU1MiA0My42NDM5IDQ4Ljc5MzcgNDkuMzMwMiA0NS45MTc3IDUyLjU0MzZDNDAuNTIxMSA1OC41NzMyIDMyLjk1NDEgNjIuNjkxMiAyNC44Mzg2IDYzLjA0MzJDMTUuMDMzIDYzLjQ2ODkgOS4zNTU4IDU4LjQ5ODEgMi41MjI1NCA1Mi4xNzU0QzEuNTM0OTEgNTEuMTcwNyAwLjc4MDQ4NiA1MC4wOTQ0IDAgNDguOTIwOEMwLjIwMTEzNSA0OC4zMzY0IDAuNDA4OTUxIDQ3Ljc2NCAwLjY2MzU0NCA0Ny4yMDEyQzEuODk5MDkgNDQuNDYzNSAzLjU4NDM1IDQzLjUzMzEgNi4yODk5OSA0Mi41MjQ0QzEwLjY0ODggNDUuMzU2NyAxNC4wODgyIDUwLjQ2NCAxOC43NDMgNTIuNTE2NkMyMy4wMjAzIDU0LjQwMzcgMjguMTQ4MyA1NC4wODgyIDMyLjM5NjIgNTIuMjcyN0MzNy42NTQ0IDUwLjAyNjIgNDIuMDAzOSA0NS44MTU1IDQ0LjE2MTYgNDAuNDc1OEMzOC43NjY0IDM2LjAwNTcgMzMuNjUzMSAzMS4yODAyIDI4LjE0MjkgMjYuOTIyMkMzMC4xOTUxIDI0Ljc1IDMyLjE1OSAyMy40NTE0IDM0LjkzNDggMjIuNDY2M1oiIGZpbGw9IiMyOTYyRkYiLz4KPHBhdGggZD0iTTM1LjEyMDEgNi4wNDg2NkMzNS44NjQ1IDUuOTk5NTYgMzYuNjA5NiA1Ljk4NzYyIDM3LjM1NTMgNi4wMTI4NEMzOC4xMDEgNi4wMzg1MSAzOC44NDM3IDYuMTAwOTEgMzkuNTgzMiA2LjJDNDAuMzIzMSA2LjI5OTU1IDQxLjA1NjEgNi40MzUzNSA0MS43ODIzIDYuNjA3NDJDNDIuNTA4OSA2Ljc3OTkzIDQzLjIyNTIgNi45ODgwNCA0My45MzEzIDcuMjMxNzNDNDguNDU0NSA4Ljc0MzE2IDU3Ljc2NjIgMTQuNTY3OSA1OS42NzA2IDE4LjgyMThDNjAuMDQ2MiAxOS42NjEgNjAuMTMzNyAyMC42MjMxIDU5Ljc1OTUgMjEuNDgwNUM1OS4xNzA4IDIyLjgyOTggNTguMDA4OCAyNC4wMjg0IDU2LjU5MDEgMjQuNDQzM0M1MS45MzczIDI1LjgwMTMgNDYuNTYwOCAxOS4yMjM5IDQyLjgxNzQgMTcuMTMyQzQyLjU5MDYgMTcuMDAyOCA0Mi4zNjA1IDE2Ljg3OTQgNDIuMTI3MSAxNi43NjE4QzQxLjg5NDEgMTYuNjQ0NyA0MS42NTgyIDE2LjUzMzQgNDEuNDE5NCAxNi40MjhDNDEuMTgwNyAxNi4zMjMxIDQwLjkzOTIgMTYuMjI0MiA0MC42OTUxIDE2LjEzMTRDNDAuNDUxNCAxNi4wMzg2IDQwLjIwNTUgMTUuOTUyNCAzOS45NTc0IDE1Ljg3MjZDMzkuNzA4OCAxNS43OTI5IDM5LjQ1ODYgMTUuNzE5NSAzOS4yMDY5IDE1LjY1MjRDMzguOTU0OCAxNS41ODUzIDM4LjcwMTMgMTUuNTI0OSAzOC40NDY1IDE1LjQ3MTNDMzguMTkxMiAxNS40MTc3IDM3LjkzNTEgMTUuMzcwNiAzNy42NzggMTUuMzMwMUMzNy40MjA2IDE1LjI4OTUgMzcuMTYyMiAxNS4yNTU4IDM2LjkwMjkgMTUuMjI4N0MzNi42NDQxIDE1LjIwMTMgMzYuMzg0NiAxNS4xODA4IDM2LjEyNDQgMTUuMTY3M0MzNS44NjQzIDE1LjE1MzcgMzUuNjAzOSAxNS4xNDY4IDM1LjM0MzMgMTUuMTQ2M0MzNS4wODI3IDE1LjE0NjMgMzQuODIyMyAxNS4xNTI4IDM0LjU2MjEgMTUuMTY1OUMzNC4zMDIgMTUuMTc5NCAzNC4wNDI1IDE1LjE5OTUgMzMuNzgzNiAxNS4yMjZDMzMuNTI0NCAxNS4yNTMxIDMzLjI2NiAxNS4yODY2IDMzLjAwODUgMTUuMzI2N0MzMi43NTEgMTUuMzY2OCAzMi40OTQ2IDE1LjQxMzYgMzIuMjM5NCAxNS40NjcyQzMxLjk4NDUgMTUuNTIwOCAzMS43MzExIDE1LjU4MSAzMS40Nzg5IDE1LjY0NzZDMzEuMjI2OCAxNS43MTM5IDMwLjk3NjcgMTUuNzg2OCAzMC43Mjg1IDE1Ljg2NjZDMjQuODA4NyAxNy43MzI3IDIwLjk3MTggMjIuNjg3MyAxOC4zMDk2IDI4LjA3MjJDMTkuNzI2OSAyOS41NzQ5IDIxLjIxNDMgMzEuMDIyMSAyMi42NjUgMzIuNDkyM0MyNi40NTE5IDM1Ljk0MDIgMzAuNzE3OCAzOS4yNzI1IDM0LjAzMjIgNDMuMTc3N0MzMi40NDU5IDQ0LjQ2NDIgMzAuOTA4MyA0NS42ODQ0IDI4LjkxNSA0Ni4yNzAyQzI3LjE3ODIgNDYuNzgwMyAyNS4wNjY2IDQ2LjgyNDMgMjMuNDYwMiA0NS45QzIwLjYwNjkgNDQuMjU3NSA4LjUzNjc5IDMzLjE5OTEgOC4xNDI1NCAzMC4xNzgyQzcuODM3ODMgMjcuODM5MSAxMy44NDMyIDE5LjQ0OTUgMTUuMzYzNCAxNy40NzA1QzIwLjM5NTggMTAuOTE4MSAyNi45NzkxIDcuMDY4MjEgMzUuMTIwMSA2LjA0ODY2WiIgZmlsbD0iIzI5NjJGRiIvPgo8cGF0aCBkPSJNODQuNTYgNTZWMTRIMTAwLjE2QzEwMy4xMiAxNCAxMDUuNzQgMTQuNiAxMDguMDIgMTUuOEMxMTAuMyAxNi45NiAxMTIuMDggMTguNiAxMTMuMzYgMjAuNzJDMTE0LjY0IDIyLjggMTE1LjI4IDI1LjIyIDExNS4yOCAyNy45OEMxMTUuMjggMzAuNyAxMTQuNjYgMzMuMTIgMTEzLjQyIDM1LjI0QzExMi4xOCAzNy4zNiAxMTAuNDggMzkuMDQgMTA4LjMyIDQwLjI4QzEwNi4xNiA0MS40OCAxMDMuNjYgNDIuMDggMTAwLjgyIDQyLjA4SDkyLjc4VjU2SDg0LjU2Wk05Mi43OCAzNC41MkgxMDAuNjRDMTAyLjQ4IDM0LjUyIDEwMy45OCAzMy45MiAxMDUuMTQgMzIuNzJDMTA2LjM0IDMxLjQ4IDEwNi45NCAyOS45IDEwNi45NCAyNy45OEMxMDYuOTQgMjYuMDYgMTA2LjI4IDI0LjUgMTA0Ljk2IDIzLjNDMTAzLjY4IDIyLjEgMTAyLjAyIDIxLjUgOTkuOTggMjEuNUg5Mi43OFYzNC41MlpNMTMzLjA4NiA1Ni43MkMxMzAuMDQ2IDU2LjcyIDEyNy4zMjYgNTYuMDYgMTI0LjkyNiA1NC43NEMxMjIuNTY2IDUzLjM4IDEyMC43MDYgNTEuNTIgMTE5LjM0NiA0OS4xNkMxMTguMDI2IDQ2LjggMTE3LjM2NiA0NC4wOCAxMTcuMzY2IDQxQzExNy4zNjYgMzcuOTIgMTE4LjAyNiAzNS4yIDExOS4zNDYgMzIuODRDMTIwLjY2NiAzMC40OCAxMjIuNTA2IDI4LjY0IDEyNC44NjYgMjcuMzJDMTI3LjIyNiAyNS45NiAxMjkuOTI2IDI1LjI4IDEzMi45NjYgMjUuMjhDMTM2LjA0NiAyNS4yOCAxMzguNzY2IDI1Ljk2IDE0MS4xMjYgMjcuMzJDMTQzLjQ4NiAyOC42NCAxNDUuMzI2IDMwLjQ4IDE0Ni42NDYgMzIuODRDMTQ3Ljk2NiAzNS4yIDE0OC42MjYgMzcuOTIgMTQ4LjYyNiA0MUMxNDguNjI2IDQ0LjA4IDE0Ny45NjYgNDYuOCAxNDYuNjQ2IDQ5LjE2QzE0NS4zMjYgNTEuNTIgMTQzLjQ4NiA1My4zOCAxNDEuMTI2IDU0Ljc0QzEzOC44MDYgNTYuMDYgMTM2LjEyNiA1Ni43MiAxMzMuMDg2IDU2LjcyWk0xMzMuMDg2IDQ5LjRDMTM0LjU2NiA0OS40IDEzNS44NjYgNDkuMDQgMTM2Ljk4NiA0OC4zMkMxMzguMTA2IDQ3LjYgMTM4Ljk2NiA0Ni42MiAxMzkuNTY2IDQ1LjM4QzE0MC4yMDYgNDQuMSAxNDAuNTI2IDQyLjY0IDE0MC41MjYgNDFDMTQwLjUyNiAzOS4zNiAxNDAuMjA2IDM3LjkyIDEzOS41NjYgMzYuNjhDMTM4LjkyNiAzNS40IDEzOC4wMjYgMzQuNCAxMzYuODY2IDMzLjY4QzEzNS43NDYgMzIuOTYgMTM0LjQ0NiAzMi42IDEzMi45NjYgMzIuNkMxMzEuNTI2IDMyLjYgMTMwLjIyNiAzMi45NiAxMjkuMDY2IDMzLjY4QzEyNy45NDYgMzQuNCAxMjcuMDY2IDM1LjQgMTI2LjQyNiAzNi42OEMxMjUuNzg2IDM3LjkyIDEyNS40NjYgMzkuMzYgMTI1LjQ2NiA0MUMxMjUuNDY2IDQyLjY0IDEyNS43ODYgNDQuMSAxMjYuNDI2IDQ1LjM4QzEyNy4wNjYgNDYuNjIgMTI3Ljk2NiA0Ny42IDEyOS4xMjYgNDguMzJDMTMwLjI4NiA0OS4wNCAxMzEuNjA2IDQ5LjQgMTMzLjA4NiA0OS40Wk0xNjguMzEgNTYuNzJDMTY1LjE5IDU2LjcyIDE2Mi40MSA1Ni4wNiAxNTkuOTcgNTQuNzRDMTU3LjUzIDUzLjM4IDE1NS42MyA1MS41MiAxNTQuMjcgNDkuMTZDMTUyLjkxIDQ2Ljc2IDE1Mi4yMyA0NC4wNCAxNTIuMjMgNDFDMTUyLjIzIDM3LjkyIDE1Mi45MSAzNS4yIDE1NC4yNyAzMi44NEMxNTUuNjMgMzAuNDggMTU3LjUxIDI4LjY0IDE1OS45MSAyNy4zMkMxNjIuMzEgMjUuOTYgMTY1LjA3IDI1LjI4IDE2OC4xOSAyNS4yOEMxNzEuMTkgMjUuMjggMTczLjkzIDI2LjAyIDE3Ni40MSAyNy41QzE3OC44OSAyOC45OCAxODAuNjkgMzEuMTIgMTgxLjgxIDMzLjkyTDE3NC4zNyAzNi41NkMxNzMuODEgMzUuNCAxNzIuOTMgMzQuNDggMTcxLjczIDMzLjhDMTcwLjU3IDMzLjA4IDE2OS4yNyAzMi43MiAxNjcuODMgMzIuNzJDMTY2LjM1IDMyLjcyIDE2NS4wNSAzMy4wOCAxNjMuOTMgMzMuOEMxNjIuODEgMzQuNDggMTYxLjkzIDM1LjQ0IDE2MS4yOSAzNi42OEMxNjAuNjUgMzcuOTIgMTYwLjMzIDM5LjM2IDE2MC4zMyA0MUMxNjAuMzMgNDIuNjQgMTYwLjY1IDQ0LjA4IDE2MS4yOSA0NS4zMkMxNjEuOTMgNDYuNTIgMTYyLjgzIDQ3LjQ4IDE2My45OSA0OC4yQzE2NS4xNSA0OC45MiAxNjYuNDcgNDkuMjggMTY3Ljk1IDQ5LjI4QzE2OS4zOSA0OS4yOCAxNzAuNjkgNDguOSAxNzEuODUgNDguMTRDMTczLjA1IDQ3LjM4IDE3My45MyA0Ni4zOCAxNzQuNDkgNDUuMTRMMTgxLjk5IDQ3Ljc4QzE4MC44MyA1MC42MiAxNzkuMDEgNTIuODIgMTc2LjUzIDU0LjM4QzE3NC4wOSA1NS45NCAxNzEuMzUgNTYuNzIgMTY4LjMxIDU2LjcyWk0xOTQuMTY0IDQ4LjM4TDE4OS40MjQgNDIuOTJMMjA0Ljc4NCAyNkgyMTQuMjA0TDE5NC4xNjQgNDguMzhaTTE4Ni42MDQgNTZWMTRIMTk0LjUyNFY1NkgxODYuNjA0Wk0yMDUuODA0IDU2TDE5NS44NDQgNDEuNDhMMjAxLjAwNCAzNi4wMkwyMTUuMTA0IDU2SDIwNS44MDRaTTIzMC44NjcgNTYuNzJDMjI3LjkwNyA1Ni43MiAyMjUuMjg3IDU2LjA2IDIyMy4wMDcgNTQuNzRDMjIwLjcyNyA1My4zOCAyMTguOTI3IDUxLjUyIDIxNy42MDcgNDkuMTZDMjE2LjMyNyA0Ni44IDIxNS42ODcgNDQuMDggMjE1LjY4NyA0MUMyMTUuNjg3IDM3LjkyIDIxNi4zNDcgMzUuMiAyMTcuNjY3IDMyLjg0QzIxOS4wMjcgMzAuNDggMjIwLjg2NyAyOC42NCAyMjMuMTg3IDI3LjMyQzIyNS41NDcgMjUuOTYgMjI4LjI0NyAyNS4yOCAyMzEuMjg3IDI1LjI4QzIzMy45MjcgMjUuMjggMjM2LjM0NyAyNS45OCAyMzguNTQ3IDI3LjM4QzI0MC43ODcgMjguNzQgMjQyLjU2NyAzMC43NiAyNDMuODg3IDMzLjQ0QzI0NS4yNDcgMzYuMDggMjQ1LjkyNyAzOS4zIDI0NS45MjcgNDMuMUgyMjMuMTg3TDIyMy45MDcgNDIuMzhDMjIzLjkwNyA0My44NiAyMjQuMjY3IDQ1LjE2IDIyNC45ODcgNDYuMjhDMjI1Ljc0NyA0Ny4zNiAyMjYuNzA3IDQ4LjIgMjI3Ljg2NyA0OC44QzIyOS4wNjcgNDkuMzYgMjMwLjM0NyA0OS42NCAyMzEuNzA3IDQ5LjY0QzIzMy4zNDcgNDkuNjQgMjM0LjY4NyA0OS4zIDIzNS43MjcgNDguNjJDMjM2Ljc2NyA0Ny45IDIzNy41NjcgNDYuOTggMjM4LjEyNyA0NS44NkwyNDUuMjA3IDQ4LjYyQzI0NC4zNjcgNTAuMyAyNDMuMjY3IDUxLjc2IDI0MS45MDcgNTNDMjQwLjU4NyA1NC4yIDIzOS4wMDcgNTUuMTIgMjM3LjE2NyA1NS43NkMyMzUuMzI3IDU2LjQgMjMzLjIyNyA1Ni43MiAyMzAuODY3IDU2LjcyWk0yMjQuMzI3IDM3Ljk0TDIyMy42MDcgMzcuMjJIMjM4LjA2N0wyMzcuNDA3IDM3Ljk0QzIzNy40MDcgMzYuNSAyMzcuMDY3IDM1LjM2IDIzNi4zODcgMzQuNTJDMjM1LjcwNyAzMy42NCAyMzQuODY3IDMzIDIzMy44NjcgMzIuNkMyMzIuOTA3IDMyLjIgMjMxLjk2NyAzMiAyMzEuMDQ3IDMyQzIzMC4xMjcgMzIgMjI5LjE0NyAzMi4yIDIyOC4xMDcgMzIuNkMyMjcuMDY3IDMzIDIyNi4xNjcgMzMuNjQgMjI1LjQwNyAzNC41MkMyMjQuNjg3IDM1LjM2IDIyNC4zMjcgMzYuNSAyMjQuMzI3IDM3Ljk0Wk0yNjIuODg5IDU2LjcyQzI1OS41NjkgNTYuNzIgMjU3LjA0OSA1NS45IDI1NS4zMjkgNTQuMjZDMjUzLjY0OSA1Mi42MiAyNTIuODA5IDUwLjI4IDI1Mi44MDkgNDcuMjRWMTYuNjRIMjYwLjcyOVY0NS41QzI2MC43MjkgNDYuNzggMjYxLjAwOSA0Ny43NiAyNjEuNTY5IDQ4LjQ0QzI2Mi4xMjkgNDkuMDggMjYyLjk0OSA0OS40IDI2NC4wMjkgNDkuNEMyNjQuNDI5IDQ5LjQgMjY0Ljg2OSA0OS4zMiAyNjUuMzQ5IDQ5LjE2QzI2NS44MjkgNDguOTYgMjY2LjMyOSA0OC42OCAyNjYuODQ5IDQ4LjMyTDI2OS42MDkgNTQuMjZDMjY4LjY0OSA1NC45OCAyNjcuNTY5IDU1LjU2IDI2Ni4zNjkgNTZDMjY1LjIwOSA1Ni40OCAyNjQuMDQ5IDU2LjcyIDI2Mi44ODkgNTYuNzJaTTI0Ny45NDkgMzIuNzJWMjZIMjY4LjIyOVYzMi43MkgyNDcuOTQ5Wk0yOTAuMjcgNTYuNzJDMjg3Ljk1IDU2LjcyIDI4NS44OSA1Ni40OCAyODQuMDkgNTZDMjgyLjI5IDU1LjQ4IDI4MC43MyA1NC43OCAyNzkuNDEgNTMuOUMyNzguMDkgNTIuOTggMjc3LjAxIDUxLjk4IDI3Ni4xNyA1MC45QzI3NS4zMyA0OS43OCAyNzQuNzEgNDguNiAyNzQuMzEgNDcuMzZMMjc5LjE3IDQ1LjY4QzI3OS43NyA0Ny40NCAyODAuOTcgNDguOTggMjgyLjc3IDUwLjNDMjg0LjYxIDUxLjU4IDI4Ni44NSA1Mi4yMiAyODkuNDkgNTIuMjJDMjkyLjczIDUyLjIyIDI5NS4yNyA1MS41OCAyOTcuMTEgNTAuM0MyOTguOTUgNDkuMDIgMjk5Ljg3IDQ3LjMyIDI5OS44NyA0NS4yQzI5OS44NyA0My4yNCAyOTkuMDUgNDEuNjYgMjk3LjQxIDQwLjQ2QzI5NS43NyAzOS4yMiAyOTMuNjEgMzguMjYgMjkwLjkzIDM3LjU4TDI4Ni4zMSAzNi4zOEMyODQuNDMgMzUuOSAyODIuNjkgMzUuMiAyODEuMDkgMzQuMjhDMjc5LjUzIDMzLjMyIDI3OC4yNyAzMi4xMiAyNzcuMzEgMzAuNjhDMjc2LjM5IDI5LjIgMjc1LjkzIDI3LjQ0IDI3NS45MyAyNS40QzI3NS45MyAyMS42IDI3Ny4xNSAxOC42NCAyNzkuNTkgMTYuNTJDMjgyLjA3IDE0LjM2IDI4NS42MyAxMy4yOCAyOTAuMjcgMTMuMjhDMjkzLjAzIDEzLjI4IDI5NS40MSAxMy43NCAyOTcuNDEgMTQuNjZDMjk5LjQxIDE1LjU0IDMwMS4wMyAxNi42OCAzMDIuMjcgMTguMDhDMzAzLjU1IDE5LjQ0IDMwNC40NSAyMC45MiAzMDQuOTcgMjIuNTJMMzAwLjE3IDI0LjJDMjk5LjQxIDIyLjIgMjk4LjEzIDIwLjY0IDI5Ni4zMyAxOS41MkMyOTQuNTMgMTguMzYgMjkyLjM1IDE3Ljc4IDI4OS43OSAxNy43OEMyODcuMTEgMTcuNzggMjg0Ljk3IDE4LjQ0IDI4My4zNyAxOS43NkMyODEuODEgMjEuMDQgMjgxLjAzIDIyLjggMjgxLjAzIDI1LjA0QzI4MS4wMyAyNi45NiAyODEuNjUgMjguNDQgMjgyLjg5IDI5LjQ4QzI4NC4xMyAzMC40OCAyODUuNzUgMzEuMjIgMjg3Ljc1IDMxLjdMMjkyLjM3IDMyLjg0QzI5Ni40NSAzMy44IDI5OS41NyAzNS40IDMwMS43MyAzNy42NEMzMDMuOTMgMzkuODQgMzA1LjAzIDQyLjIyIDMwNS4wMyA0NC43OEMzMDUuMDMgNDYuOTggMzA0LjQ3IDQ5IDMwMy4zNSA1MC44NEMzMDIuMjMgNTIuNjQgMzAwLjU3IDU0LjA4IDI5OC4zNyA1NS4xNkMyOTYuMjEgNTYuMiAyOTMuNTEgNTYuNzIgMjkwLjI3IDU2LjcyWk0zMTUuMDA1IDY4LjcyQzMxNC4yNDUgNjguNzIgMzEzLjM2NSA2OC41NiAzMTIuMzY1IDY4LjI0QzMxMS4zNjUgNjcuOTYgMzEwLjMwNSA2Ny41OCAzMDkuMTg1IDY3LjFMMzEwLjk4NSA2My4wOEMzMTEuOTA1IDYzLjQ4IDMxMi43MDUgNjMuNzggMzEzLjM4NSA2My45OEMzMTQuMTA1IDY0LjE4IDMxNC42NjUgNjQuMjggMzE1LjA2NSA2NC4yOEMzMTYuMTQ1IDY0LjI4IDMxNy4wMjUgNjMuOTggMzE3LjcwNSA2My4zOEMzMTguNDI1IDYyLjgyIDMxOS4wMjUgNjIgMzE5LjUwNSA2MC45MkwzMjIuOTI1IDUyLjc2TDMzNC4wMjUgMjZIMzM5LjE4NUwzMjQuNzg1IDYwLjJDMzI0LjAyNSA2MS45NiAzMjMuMjI1IDYzLjQ4IDMyMi4zODUgNjQuNzZDMzIxLjU4NSA2Ni4wNCAzMjAuNjA1IDY3LjAyIDMxOS40NDUgNjcuN0MzMTguMjg1IDY4LjM4IDMxNi44MDUgNjguNzIgMzE1LjAwNSA2OC43MlpNMzIxLjYwNSA1NkwzMDguNjQ1IDI2SDMxMy43NDVMMzI0LjkwNSA1Mi43TDMyNi4zNDUgNTZIMzIxLjYwNVpNMzQzLjg4OCA1NlYyNkgzNDguMzg4TDM0OC42ODggMzEuNTJWNTZIMzQzLjg4OFpNMzY0Ljk0OCA1NlY0MC42NEgzNjkuNzQ4VjU2SDM2NC45NDhaTTM2NC45NDggNDAuNjRDMzY0Ljk0OCAzNy42OCAzNjQuNjA4IDM1LjQyIDM2My45MjggMzMuODZDMzYzLjI0OCAzMi4zIDM2Mi4zMDggMzEuMjQgMzYxLjEwOCAzMC42OEMzNTkuOTA4IDMwLjA4IDM1OC41NDggMjkuNzggMzU3LjAyOCAyOS43OEMzNTQuMzg4IDI5Ljc4IDM1Mi4zMjggMzAuNzIgMzUwLjg0OCAzMi42QzM0OS40MDggMzQuNDQgMzQ4LjY4OCAzNy4wNiAzNDguNjg4IDQwLjQ2SDM0Ni4zNDhDMzQ2LjM0OCAzNy4zIDM0Ni44MDggMzQuNTggMzQ3LjcyOCAzMi4zQzM0OC42NDggMzAuMDIgMzQ5Ljk4OCAyOC4yOCAzNTEuNzQ4IDI3LjA4QzM1My41MDggMjUuODggMzU1LjYyOCAyNS4yOCAzNTguMTA4IDI1LjI4QzM2MC40NjggMjUuMjggMzYyLjUwOCAyNS43NiAzNjQuMjI4IDI2LjcyQzM2NS45ODggMjcuNjQgMzY3LjM0OCAyOS4xMiAzNjguMzA4IDMxLjE2QzM2OS4zMDggMzMuMiAzNjkuNzg4IDM1Ljg4IDM2OS43NDggMzkuMlY0MC42NEgzNjQuOTQ4Wk0zOTAuNzI1IDU2LjcyQzM4Ny43NjUgNTYuNzIgMzg1LjE0NSA1Ni4wNiAzODIuODY1IDU0Ljc0QzM4MC41ODUgNTMuMzggMzc4LjgwNSA1MS41MiAzNzcuNTI1IDQ5LjE2QzM3Ni4yNDUgNDYuOCAzNzUuNjA1IDQ0LjA4IDM3NS42MDUgNDFDMzc1LjYwNSAzNy45MiAzNzYuMjI1IDM1LjIgMzc3LjQ2NSAzMi44NEMzNzguNzQ1IDMwLjQ4IDM4MC41MjUgMjguNjQgMzgyLjgwNSAyNy4zMkMzODUuMDg1IDI1Ljk2IDM4Ny42ODUgMjUuMjggMzkwLjYwNSAyNS4yOEMzOTMuNDg1IDI1LjI4IDM5Ni4wNjUgMjUuOTQgMzk4LjM0NSAyNy4yNkM0MDAuNjI1IDI4LjU4IDQwMi4zNjUgMzAuNDQgNDAzLjU2NSAzMi44NEwzOTkuMTg1IDM0LjgyQzM5OC4zODUgMzMuMjIgMzk3LjIyNSAzMS45OCAzOTUuNzA1IDMxLjFDMzk0LjE4NSAzMC4xOCAzOTIuNDQ1IDI5LjcyIDM5MC40ODUgMjkuNzJDMzg4LjUyNSAyOS43MiAzODYuNzg1IDMwLjIgMzg1LjI2NSAzMS4xNkMzODMuNzg1IDMyLjEyIDM4Mi42MDUgMzMuNDYgMzgxLjcyNSAzNS4xOEMzODAuODg1IDM2Ljg2IDM4MC40NjUgMzguOCAzODAuNDY1IDQxQzM4MC40NjUgNDMuMiAzODAuODg1IDQ1LjE2IDM4MS43MjUgNDYuODhDMzgyLjYwNSA0OC41NiAzODMuODA1IDQ5Ljg4IDM4NS4zMjUgNTAuODRDMzg2Ljg4NSA1MS44IDM4OC42NDUgNTIuMjggMzkwLjYwNSA1Mi4yOEMzOTIuNTY1IDUyLjI4IDM5NC4zMDUgNTEuNzggMzk1LjgyNSA1MC43OEMzOTcuMzg1IDQ5Ljc4IDM5OC41NjUgNDguMzggMzk5LjM2NSA0Ni41OEw0MDMuNzQ1IDQ4LjU2QzQwMi41NDUgNTEuMTIgNDAwLjgwNSA1My4xMiAzOTguNTI1IDU0LjU2QzM5Ni4yNDUgNTYgMzkzLjY0NSA1Ni43MiAzOTAuNzI1IDU2LjcyWiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+"
+                preserveAspectRatio="none" width="100%" height="100%"></image>
+        </symbol>
+        <style class="style-fonts">
+            @font-face {
+                font-family: Excalifont;
+                src: url(data:font/woff2;base64,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);
+            }
+        </style>
+    </defs>
+    <rect x="0" y="0" width="1276.4990772998315" height="449.5838650555015" fill="#ffffff"></rect>
+    <g stroke-linecap="round"
+        transform="translate(10 108.29144032494213) rotate(0 84.67646638786618 45.81375979940523)">
+        <path
+            d="M22.91 0 C63.56 -0.55, 104.71 0.8, 146.45 0 M22.91 0 C70.69 0.56, 117.61 0.53, 146.45 0 M146.45 0 C159.9 1.86, 169.75 7.52, 169.35 22.91 M146.45 0 C160.19 0.26, 170.88 8.66, 169.35 22.91 M169.35 22.91 C169.53 32.12, 167.49 41.89, 169.35 68.72 M169.35 22.91 C168.86 32.14, 169.49 41.05, 169.35 68.72 M169.35 68.72 C169.79 85.52, 163.45 90.65, 146.45 91.63 M169.35 68.72 C167.64 85.36, 160.46 93.32, 146.45 91.63 M146.45 91.63 C121.11 89.43, 96.75 88.71, 22.91 91.63 M146.45 91.63 C115.63 91.8, 84.68 90.22, 22.91 91.63 M22.91 91.63 C6.57 90.46, -1.11 82.47, 0 68.72 M22.91 91.63 C5.74 91.97, 2.05 84.74, 0 68.72 M0 68.72 C0 57.94, 0.33 49.53, 0 22.91 M0 68.72 C-0.56 54.17, -0.79 38.93, 0 22.91 M0 22.91 C1.01 9.16, 9.04 1.05, 22.91 0 M0 22.91 C-0.64 9.81, 8.09 -1.34, 22.91 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g transform="translate(40.914469684148116 132.66333460967485) rotate(0 56.271449146938494 9.701973990851457)">
+        <use href="#image-145c2da497f76fce24e50c87b9b0b1ff46eaca6a" width="113" height="19" opacity="1"></use>
+    </g>
+    <g transform="translate(72.80258562490963 155.91000583093967) rotate(0 24.383333206176758 10)"><text x="0"
+            y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px" fill="#1e1e1e"
+            text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Server</text>
+    </g>
+    <g stroke-linecap="round"
+        transform="translate(780.101954903171 27.532597139468805) rotate(0 84.67646638786618 45.81375979940523)">
+        <path
+            d="M22.91 0 C62.89 -2.23, 99.55 0.95, 146.45 0 M22.91 0 C59.54 -0.1, 93.49 0.05, 146.45 0 M146.45 0 C162.29 -0.34, 170.95 8.28, 169.35 22.91 M146.45 0 C161.86 -1.2, 170.26 9.69, 169.35 22.91 M169.35 22.91 C170.78 32.05, 168.37 43.7, 169.35 68.72 M169.35 22.91 C170.34 40.33, 168.99 57.11, 169.35 68.72 M169.35 68.72 C168.35 83.01, 160.43 90.97, 146.45 91.63 M169.35 68.72 C167.19 85.25, 162.51 91.46, 146.45 91.63 M146.45 91.63 C96.97 93.45, 50.91 94.55, 22.91 91.63 M146.45 91.63 C108.05 90.14, 68.5 90.14, 22.91 91.63 M22.91 91.63 C8.88 89.89, -1.19 82.52, 0 68.72 M22.91 91.63 C7.5 89.83, -0.88 85.72, 0 68.72 M0 68.72 C0.14 52.6, 1.97 33.87, 0 22.91 M0 68.72 C-0.94 59.17, -0.23 48.21, 0 22.91 M0 22.91 C1.18 6.75, 8.61 -0.04, 22.91 0 M0 22.91 C-0.94 6.84, 5.82 0.1, 22.91 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g transform="translate(811.0164245873195 51.90449142420158) rotate(0 56.271449146938494 9.701973990851457)">
+        <use href="#image-145c2da497f76fce24e50c87b9b0b1ff46eaca6a" width="113" height="19" opacity="1"></use>
+    </g>
+    <g transform="translate(842.9045405280806 75.1511626454664) rotate(0 12.316666603088379 10)"><text x="0" y="14.096"
+            font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+            style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">DB</text></g>
+    <g stroke-linecap="round"
+        transform="translate(416.87568749842853 10) rotate(0 424.81169490070147 214.79193252775076)">
+        <path
+            d="M32 0 C234.16 -1.14, 435.33 -0.94, 817.62 0 M32 0 C314.96 2.49, 598.1 3.09, 817.62 0 M817.62 0 C840.1 0.24, 848.7 12.41, 849.62 32 M817.62 0 C839.57 0.84, 850.03 9.73, 849.62 32 M849.62 32 C847.76 136.14, 849.63 239.09, 849.62 397.58 M849.62 32 C850.02 159.01, 850.99 285.28, 849.62 397.58 M849.62 397.58 C850.7 420.4, 837.59 427.69, 817.62 429.58 M849.62 397.58 C850.79 418.36, 839.51 428.46, 817.62 429.58 M817.62 429.58 C658.48 428.28, 498.34 427.56, 32 429.58 M817.62 429.58 C647.07 431.21, 476.42 431.64, 32 429.58 M32 429.58 C10.62 428.41, -1.87 420.36, 0 397.58 M32 429.58 C10.17 428.74, 1.68 420.54, 0 397.58 M0 397.58 C-0.86 283.14, 0.53 169.74, 0 32 M0 397.58 C0.77 310.06, -0.05 223.28, 0 32 M0 32 C0.96 12.05, 12.46 -1.43, 32 0 M0 32 C-0.03 12.95, 11.95 1.23, 32 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g stroke-linecap="round"
+        transform="translate(458.16844005216103 242.40303076530682) rotate(0 84.67646638786618 45.81375979940523)">
+        <path
+            d="M22.91 0 C65.58 0.85, 109.68 -0.54, 146.45 0 M22.91 0 C69.25 0.9, 116.03 1.21, 146.45 0 M146.45 0 C162.27 -0.04, 168.75 9.42, 169.35 22.91 M146.45 0 C159.65 0.16, 168.5 6.25, 169.35 22.91 M169.35 22.91 C170.31 38.26, 167.78 54.1, 169.35 68.72 M169.35 22.91 C169.92 39.09, 168.99 56.3, 169.35 68.72 M169.35 68.72 C168.04 85.35, 160.96 90.67, 146.45 91.63 M169.35 68.72 C171.12 86.1, 163.76 91.99, 146.45 91.63 M146.45 91.63 C118.14 90.77, 90.16 90.72, 22.91 91.63 M146.45 91.63 C102.63 92.2, 61.16 93.52, 22.91 91.63 M22.91 91.63 C7.41 89.76, -0.14 84.97, 0 68.72 M22.91 91.63 C5.45 90.6, 0.16 82.18, 0 68.72 M0 68.72 C0.64 55.96, 0.42 38.73, 0 22.91 M0 68.72 C0.02 54.28, -0.17 37.88, 0 22.91 M0 22.91 C-1.4 7.16, 9.22 -1.97, 22.91 0 M0 22.91 C0.33 8.9, 9.1 -1.76, 22.91 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g transform="translate(489.0829097363096 266.7749250500396) rotate(0 56.271449146938494 9.701973990851457)">
+        <use href="#image-145c2da497f76fce24e50c87b9b0b1ff46eaca6a" width="113" height="19" opacity="1"></use>
+    </g>
+    <g transform="translate(520.9710256770707 290.0215962713044) rotate(0 24.733333587646484 10)"><text x="0" y="14.096"
+            font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="start"
+            style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Engine</text></g>
+    <g stroke-linecap="round"
+        transform="translate(998.9774542983907 281.34476896145685) rotate(0 84.67646638786618 45.81375979940523)">
+        <path
+            d="M22.91 0 C69.11 -0.26, 113.84 1.13, 146.45 0 M22.91 0 C58.59 -0.69, 94.52 -0.63, 146.45 0 M146.45 0 C160.39 -1.93, 169.81 8.38, 169.35 22.91 M146.45 0 C161.03 -0.17, 170.35 9.19, 169.35 22.91 M169.35 22.91 C167.89 41.86, 168.5 57.88, 169.35 68.72 M169.35 22.91 C170.17 35.49, 170.63 47.86, 169.35 68.72 M169.35 68.72 C168.93 83.45, 162.6 91.18, 146.45 91.63 M169.35 68.72 C169.89 83.72, 163.44 91, 146.45 91.63 M146.45 91.63 C106.61 89.4, 72.22 91.31, 22.91 91.63 M146.45 91.63 C102.54 91.46, 59.83 91.54, 22.91 91.63 M22.91 91.63 C8.08 89.84, 1.43 82.85, 0 68.72 M22.91 91.63 C8.09 92.12, -1.33 83.1, 0 68.72 M0 68.72 C1.81 51.74, 0.26 36.96, 0 22.91 M0 68.72 C0.24 53.35, 0.75 37.96, 0 22.91 M0 22.91 C0.82 8.55, 9.46 -1.73, 22.91 0 M0 22.91 C0.7 8.79, 9.4 2.12, 22.91 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g transform="translate(1042.37058786155 317.1585287608621) rotate(0 41.28333282470703 10)"><text
+            x="41.28333282470703" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Data layer</text></g>
+    <g mask="url(#mask-YQWF4ZYtMVAcnNwqXviNf)" stroke-linecap="round">
+        <g transform="translate(180.17748409683531 179.64215848399323) rotate(0 137.34450176708583 46.4689837826586)">
+            <path
+                d="M-0.07 -0.36 C17.93 -1.58, 61.9 -24.43, 107.62 -7.56 C153.35 9.31, 246.43 82.75, 274.26 100.87 M-1.57 -1.59 C16.38 -2.61, 61.33 -22.83, 107.14 -6.1 C152.95 10.63, 245.32 81.28, 273.28 98.8"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(180.17748409683531 179.64215848399323) rotate(0 137.34450176708583 46.4689837826586)">
+            <path
+                d="M249.08 92.53 C255 95.71, 261.86 95.22, 273.28 98.8 M249.08 92.53 C258.38 95.19, 265.95 95.87, 273.28 98.8"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(180.17748409683531 179.64215848399323) rotate(0 137.34450176708583 46.4689837826586)">
+            <path
+                d="M258.77 78.44 C262.06 85.42, 266.3 88.73, 273.28 98.8 M258.77 78.44 C264.73 86.02, 268.96 91.55, 273.28 98.8"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-YQWF4ZYtMVAcnNwqXviNf">
+        <rect x="0" y="0" fill="#fff" width="554.866487631007" height="387.37356377425357"></rect>
+        <rect x="203.6984299379833" y="162.2454396215216" fill="#000" width="166.43333435058594" height="20"
+            opacity="1"></rect>
+    </mask>
+    <g transform="translate(203.69842993798284 162.24543962152165) rotate(0 112.82704604209198 60.957756677109074)">
+        <text x="83.21666717529297" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Notiy + Send changes</text></g>
+    <g mask="url(#mask-mgKEGQUea9yHHCGHqj30l)" stroke-linecap="round">
+        <g
+            transform="translate(491.14693121555115 241.84211765035343) rotate(0 -154.50639560150069 -86.47914645948191)">
+            <path
+                d="M0.69 0.52 C-21.56 -28.3, -81.07 -152.79, -132.67 -173 C-184.28 -193.2, -279.48 -129.33, -308.94 -120.69 M-0.41 -0.25 C-22.94 -28.87, -82.33 -151.63, -133.87 -171.48 C-185.41 -191.32, -280.42 -127.86, -309.66 -119.31"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g
+            transform="translate(491.14693121555115 241.84211765035343) rotate(0 -154.50639560150069 -86.47914645948191)">
+            <path
+                d="M-291.85 -136.85 C-297.6 -131.01, -305.17 -123.58, -309.66 -119.31 M-291.85 -136.85 C-297.45 -130.54, -302.56 -125.42, -309.66 -119.31"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g
+            transform="translate(491.14693121555115 241.84211765035343) rotate(0 -154.50639560150069 -86.47914645948191)">
+            <path
+                d="M-284.74 -121.3 C-293.14 -121.2, -303.34 -119.55, -309.66 -119.31 M-284.74 -121.3 C-292.5 -119.82, -299.8 -119.51, -309.66 -119.31"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-mgKEGQUea9yHHCGHqj30l">
+        <rect x="0" y="0" fill="#fff" width="900.1597224185525" height="514.8004105693173"></rect>
+        <rect x="306.44425451619327" y="58.88382473138961" fill="#000" width="105" height="20" opacity="1"></rect>
+    </mask>
+    <g transform="translate(306.4442545161928 58.88382473138961) rotate(0 30.216827322426298 94.75840872056116)"><text
+            x="52.5" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px" fill="#1e1e1e"
+            text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Push
+            changes</text></g>
+    <g mask="url(#mask-Vgnd0c1o96t3BZufo4ed_)" stroke-linecap="round">
+        <g transform="translate(1016.4932601328312 281.112649489668) rotate(0 -53.02667609111154 -80.73652010978836)">
+            <path
+                d="M0.99 0.16 C-9.13 -14.32, -41.81 -59.52, -59.77 -86.54 C-77.73 -113.55, -99 -149.43, -106.79 -161.93 M0.04 -0.8 C-10.27 -15.17, -43.13 -58.73, -60.51 -85.4 C-77.9 -112.08, -96.62 -148.34, -104.29 -160.85"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(1016.4932601328312 281.112649489668) rotate(0 -53.02667609111154 -80.73652010978836)">
+            <path
+                d="M-85.23 -144.67 C-92.15 -149.92, -100.83 -157.87, -104.29 -160.85 M-85.23 -144.67 C-89.79 -148.4, -96.15 -152.76, -104.29 -160.85"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(1016.4932601328312 281.112649489668) rotate(0 -53.02667609111154 -80.73652010978836)">
+            <path
+                d="M-100.09 -136.2 C-101.46 -144.75, -104.58 -155.87, -104.29 -160.85 M-100.09 -136.2 C-100.73 -142.15, -103.19 -148.73, -104.29 -160.85"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-Vgnd0c1o96t3BZufo4ed_">
+        <rect x="0" y="0" fill="#fff" width="1222.5466123150543" height="542.5856897092447"></rect>
+        <rect x="875.7646308416197" y="185.33621906646692" fill="#000" width="161.13333129882812" height="20"
+            opacity="1"></rect>
+    </mask>
+    <g transform="translate(875.7646308416192 185.33621906646687) rotate(0 87.82470709740937 14.893287330791509)"><text
+            x="80.56666564941406" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Store/Retrieve data</text></g>
+    <g transform="translate(1089.0954355118 81.23727436368952) rotate(0 45.306043943903205 6.7654619611439415)"><text
+            x="0" y="9.536595180428495" font-family="Excalifont, Xiaolai, Segoe UI Emoji"
+            font-size="10.824739137830301px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;"
+            direction="ltr" dominant-baseline="alphabetic">Auto-log changes</text></g>
+    <g stroke-linecap="round"
+        transform="translate(1080.9017426538646 70.31235055310938) rotate(0 51.698300175066606 19.11861666851523)">
+        <path
+            d="M9.56 0 C42.42 -0.2, 72.97 -0.11, 93.84 0 M9.56 0 C27.35 -1.36, 44.81 -0.59, 93.84 0 M93.84 0 C99.62 0.45, 105.04 1.81, 103.4 9.56 M93.84 0 C99.63 0.04, 103.2 4.49, 103.4 9.56 M103.4 9.56 C102.58 15.81, 101.71 22.51, 103.4 28.68 M103.4 9.56 C103.29 16.45, 103.98 22.21, 103.4 28.68 M103.4 28.68 C103.13 33.78, 99.19 36.84, 93.84 38.24 M103.4 28.68 C102.77 36.06, 102.32 37.59, 93.84 38.24 M93.84 38.24 C69.74 39.48, 45.23 39.55, 9.56 38.24 M93.84 38.24 C75.71 38.11, 55.08 37.41, 9.56 38.24 M9.56 38.24 C3.04 40.05, 1.76 36.04, 0 28.68 M9.56 38.24 C4.45 36.96, 1.01 33.12, 0 28.68 M0 28.68 C0.62 25.52, -0.35 18.15, 0 9.56 M0 28.68 C0.67 23.95, 0.2 19, 0 9.56 M0 9.56 C-0.19 2.93, 1.4 0.91, 9.56 0 M0 9.56 C-1.88 4.04, 1.01 -1.75, 9.56 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g stroke-linecap="round">
+        <g transform="translate(952.4004382239725 109.09594352487863) rotate(0 88.10492128903161 16.649017389655057)">
+            <path
+                d="M0.75 -0.56 C5.6 4.94, -0.39 33.44, 28.75 33.47 C57.88 33.5, 151.04 5.24, 175.57 -0.36 M-0.31 1.76 C4.48 7.43, -0.93 35.33, 28.2 35.1 C57.33 34.86, 149.84 6.11, 174.47 0.35"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(952.4004382239725 109.09594352487863) rotate(0 88.10492128903161 16.649017389655057)">
+            <path
+                d="M154.02 14.74 C158.56 11.99, 165.31 5.76, 174.47 0.35 M154.02 14.74 C158.91 12.22, 162.36 9.42, 174.47 0.35"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(952.4004382239725 109.09594352487863) rotate(0 88.10492128903161 16.649017389655057)">
+            <path
+                d="M149.55 -1.77 C155.37 -0.08, 163.32 -1.85, 174.47 0.35 M149.55 -1.77 C155.31 -0.9, 159.66 -0.36, 174.47 0.35"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask></mask>
+    <g stroke-linecap="round">
+        <g transform="translate(1150.2205573055637 69.95568848074399) rotate(0 -100.195946183567 -19.006975039494776)">
+            <path
+                d="M1.05 -0.69 C-21.09 -6.88, -100.14 -33.48, -133.8 -37.61 C-167.47 -41.74, -190.03 -27.54, -200.95 -25.47 M0.14 1.57 C-21.56 -4.96, -98 -34.7, -131.69 -39.52 C-165.38 -44.35, -190.27 -29.45, -202 -27.39"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(1150.2205573055637 69.95568848074399) rotate(0 -100.195946183567 -19.006975039494776)">
+            <path
+                d="M-182.2 -42.64 C-187.73 -41.04, -190.25 -36.73, -202 -27.39 M-182.2 -42.64 C-188.55 -37.47, -196.69 -31.18, -202 -27.39"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(1150.2205573055637 69.95568848074399) rotate(0 -100.195946183567 -19.006975039494776)">
+            <path
+                d="M-177.03 -26.35 C-183.63 -28.26, -187.27 -27.51, -202 -27.39 M-177.03 -26.35 C-185.43 -27.12, -195.48 -26.83, -202 -27.39"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask></mask>
+    <g transform="translate(737.9308670032503 340.4503742071498) rotate(0 36.75315887197371 7.333988074964282)"><text
+            x="0" y="10.337989590469618" font-family="Excalifont, Xiaolai, Segoe UI Emoji"
+            font-size="11.734380919942813px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;"
+            direction="ltr" dominant-baseline="alphabetic">Merge Engine</text></g>
+    <g stroke-linecap="round"
+        transform="translate(718.9784912618077 327.7122664125177) rotate(0 53.730334420508825 20.725222824694583)">
+        <path
+            d="M10.36 0 C32.42 1.24, 55.21 -0.06, 97.1 0 M10.36 0 C35.73 0.4, 61.09 1.17, 97.1 0 M97.1 0 C105.41 -1.87, 106.9 5.02, 107.46 10.36 M97.1 0 C104.71 -2.03, 107.6 2.9, 107.46 10.36 M107.46 10.36 C108.42 12.88, 109 17.03, 107.46 31.09 M107.46 10.36 C107.36 14.82, 106.73 20.56, 107.46 31.09 M107.46 31.09 C105.81 37.5, 105.69 41.31, 97.1 41.45 M107.46 31.09 C107.31 36, 102.18 40.33, 97.1 41.45 M97.1 41.45 C65.98 40.94, 34.01 41.29, 10.36 41.45 M97.1 41.45 C72.56 41.27, 50.5 41.8, 10.36 41.45 M10.36 41.45 C4.13 42.38, 1.65 36.38, 0 31.09 M10.36 41.45 C4.93 39.53, -0.08 39.73, 0 31.09 M0 31.09 C0.96 23.03, 1.34 16.14, 0 10.36 M0 31.09 C-0.46 24.78, -0.94 17.93, 0 10.36 M0 10.36 C0.64 1.46, 3.74 1.25, 10.36 0 M0 10.36 C0.04 5.3, 2.93 -0.35, 10.36 0"
+            stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+    </g>
+    <g mask="url(#mask-3uNVfMc35T0peTzL9XNX2)" stroke-linecap="round">
+        <g transform="translate(540.8084051339767 334.8948820416202) rotate(0 88.42735967556428 28.706917128001265)">
+            <path
+                d="M-0.6 -0.56 C7.01 8.95, 17.21 51.45, 46.67 57.17 C76.13 62.89, 154.47 37.69, 176.17 33.76 M1.28 1.75 C8.74 11.45, 17.32 53.55, 46.28 58.58 C75.24 63.6, 153.24 36.41, 175.05 31.89"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(540.8084051339767 334.8948820416202) rotate(0 88.42735967556428 28.706917128001265)">
+            <path
+                d="M154.63 46.31 C161.5 42.68, 169.85 34.22, 175.05 31.89 M154.63 46.31 C162.51 40.62, 170.71 36.06, 175.05 31.89"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(540.8084051339767 334.8948820416202) rotate(0 88.42735967556428 28.706917128001265)">
+            <path
+                d="M150.13 29.81 C158.74 32.52, 168.81 30.39, 175.05 31.89 M150.13 29.81 C159.7 30.26, 169.57 31.86, 175.05 31.89"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-3uNVfMc35T0peTzL9XNX2">
+        <rect x="0" y="0" fill="#fff" width="817.6631244851053" height="492.3087162976227"></rect>
+        <rect x="523.03602796429" y="372.30871629762277" fill="#000" width="126.73332977294922" height="40" opacity="1">
+        </rect>
+    </mask>
+    <g transform="translate(523.0360279642896 372.3087162976227) rotate(0 105.55607419287776 -8.099783967381455)"><text
+            x="63.36666488647461" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Process remote </text><text x="63.36666488647461" y="34.096000000000004"
+            font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px" fill="#1e1e1e" text-anchor="middle"
+            style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">changes</text></g>
+    <g mask="url(#mask-7xn8CDa8P_-MBpAHuCS5D)" stroke-linecap="round">
+        <g transform="translate(767.0339262609702 327.00150277890793) rotate(0 37.237531361126 -103.40207206286908)">
+            <path
+                d="M-0.53 -0.82 C1.69 -19.52, 1.96 -77.56, 14.35 -111.76 C26.73 -145.97, 63.65 -190.3, 73.8 -206.07 M1.39 1.36 C3.93 -17.69, 4.86 -78.42, 16.74 -113.32 C28.62 -148.22, 62.82 -192.73, 72.69 -208.02"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(767.0339262609702 327.00150277890793) rotate(0 37.237531361126 -103.40207206286908)">
+            <path
+                d="M66.41 -183.83 C67.36 -194.09, 72.94 -203.48, 72.69 -208.02 M66.41 -183.83 C67.68 -192.49, 70.76 -201.55, 72.69 -208.02"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(767.0339262609702 327.00150277890793) rotate(0 37.237531361126 -103.40207206286908)">
+            <path
+                d="M52.32 -193.53 C58.71 -200, 69.7 -205.68, 72.69 -208.02 M52.32 -193.53 C58.75 -198.74, 66.92 -204.28, 72.69 -208.02"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-7xn8CDa8P_-MBpAHuCS5D">
+        <rect x="0" y="0" fill="#fff" width="941.5089889832223" height="633.8056469046461"></rect>
+        <rect x="715.9640233905352" y="204.15845817338993" fill="#000" width="132.03334045410156" height="20"
+            opacity="1"></rect>
+    </mask>
+    <g transform="translate(715.9640233905352 204.15845817339) rotate(0 87.70682425252767 19.509359651233808)"><text
+            x="66.01667022705078" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Persists changes</text></g>
+    <g mask="url(#mask-UxtQRktU-4fqEFU1szled)" stroke-linecap="round">
+        <g transform="translate(779.7215417935461 71.18642130919596) rotate(0 -104.7278238429592 85.36366535119484)">
+            <path
+                d="M-0.38 0.02 C-26.32 12.19, -121.51 45.22, -156.27 73.58 C-191.03 101.94, -199.9 154.01, -208.96 170.17 M1.63 -1.01 C-24.34 11.28, -121.56 46.25, -156.74 74.95 C-191.92 103.65, -200.43 155.09, -209.46 171.19"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(779.7215417935461 71.18642130919596) rotate(0 -104.7278238429592 85.36366535119484)">
+            <path
+                d="M-208.93 146.19 C-208.9 153.87, -209.61 159.36, -209.46 171.19 M-208.93 146.19 C-209.88 152.27, -209.01 158.29, -209.46 171.19"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+        <g transform="translate(779.7215417935461 71.18642130919596) rotate(0 -104.7278238429592 85.36366535119484)">
+            <path
+                d="M-192.99 152.38 C-196.93 158.48, -201.57 162.45, -209.46 171.19 M-192.99 152.38 C-197.92 156.87, -201.09 161.32, -209.46 171.19"
+                stroke="#1e1e1e" stroke-width="2" fill="none"></path>
+        </g>
+    </g>
+    <mask id="mask-UxtQRktU-4fqEFU1szled">
+        <rect x="0" y="0" fill="#fff" width="1089.1771894794645" height="341.91375201158564"></rect>
+        <rect x="564.4657899736239" y="135.09295955276355" fill="#000" width="116.16666412353516" height="20"
+            opacity="1"></rect>
+    </mask>
+    <g transform="translate(564.4657899736239 135.09295955276355) rotate(0 111.33777619776743 21.18059357160101)"><text
+            x="58.08333206176758" y="14.096" font-family="Excalifont, Xiaolai, Segoe UI Emoji" font-size="16px"
+            fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr"
+            dominant-baseline="alphabetic">Notify changes</text></g>
 </svg>

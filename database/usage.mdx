@@ -1,0 +1,124 @@
+---
+title: Usage
+description: "How to use PocketSyncDatabase"
+---
+
+## Usage
+
+### CRUD Operations
+
+PocketSyncDatabase provides simple methods for performing CRUD (Create, Read, Update, Delete) operations on your data.
+
+#### Create
+
+```dart
+// Insert a record
+final id = await db.insert(
+  'todos',
+  {
+    'title': 'Buy groceries',
+    'completed': 0,
+    'created_at': DateTime.now().millisecondsSinceEpoch,
+  },
+);
+```
+
+#### Read
+
+```dart
+// Get all records
+final todos = await db.query('todos');
+
+// Get a specific record
+final todo = await db.query(
+  'todos',
+  where: 'id = ?',
+  whereArgs: [1],
+);
+
+// Get records with conditions
+final incompleteTodos = await db.query(
+  'todos',
+  where: 'completed = ?',
+  whereArgs: [0],
+  orderBy: 'created_at DESC',
+);
+```
+
+#### Update
+
+```dart
+// Update a record
+final count = await db.update(
+  'todos',
+  {'completed': 1},
+  where: 'id = ?',
+  whereArgs: [1],
+);
+```
+
+#### Delete
+
+```dart
+// Delete a record
+final count = await db.delete(
+  'todos',
+  where: 'id = ?',
+  whereArgs: [1],
+);
+
+// Delete all records
+final count = await db.delete('todos');
+```
+
+#### Transactions
+
+```dart
+// Perform multiple operations in a transaction
+await db.transaction((txn) async {
+  await txn.insert('todos', {'title': 'Buy groceries'});
+  await txn.insert('todos', {'title': 'Buy milk'});
+});
+```
+
+#### Batch operations
+
+```dart
+// Perform multiple operations in a batch
+await db.batch((batch) {
+  batch.insert('todos', {'title': 'Buy groceries'});
+  batch.insert('todos', {'title': 'Buy milk'});
+});
+```
+
+#### Raw SQL
+
+```dart
+// Execute a raw SQL query
+final todos = await db.rawQuery('SELECT * FROM todos');
+```
+
+#### Watch changes
+
+```dart
+// Watch changes to a table
+final stream = db.watch('todos');
+
+// Listen to changes
+stream.listen((event) {
+  print(event);
+});
+```
+
+### Supported datatypes
+
+PocketSyncDatabase does not support the following datatypes:
+
+- `DateTime` is not a supported SQLite type. Use `INTEGER` and `millisSinceEpoch` values.
+- `bool` is not a supported SQLite type. Use `INTEGER` and `0` and `1` values.
+
+### Learn more
+
+PocketSyncDatabase is a wrapper around [sqflite](https://pub.dev/packages/sqflite), hence it supports all the features of sqflite and shares their limitations.
+
+- [sqflite](https://pub.dev/packages/sqflite)

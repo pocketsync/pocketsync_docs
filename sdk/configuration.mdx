@@ -1,0 +1,56 @@
+---
+title: Configuration
+description: "Configuration options for PocketSync"
+---
+
+## PocketSyncOptions
+
+```dart
+final pocketSync = await PocketSync.initialize(
+  options: PocketSyncOptions(
+    projectId: 'your-project-id',
+    authToken: 'your-auth-token',
+    serverUrl: 'https://api.pocketsync.dev',
+    changeLogRetentionDays: 30,
+    syncExistingData: true,
+    conflictResolutionStrategy: ConflictResolutionStrategy.lastWriteWins,
+    customResolver: null,
+    verbose: false,
+  ),
+  dbPath: dbPath,
+  databaseOptions: databaseOptions,
+);
+```
+
+### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|----------|---------|
+| `projectId` | Your project ID from the PocketSync dashboard | Yes | - |
+| `authToken` | Authentication token from the PocketSync dashboard | Yes | - |
+| `serverUrl` | PocketSync server URL | No | `https://api.pocketsync.dev` |
+| `changeLogRetentionDays` | Number of days to retain change logs | No | `30` |
+| `syncExistingData` | Whether to sync existing data | No | `true` |
+| `conflictResolutionStrategy` | Strategy for resolving conflicts | No | `lastWriteWins` |
+| `customResolver` | Custom conflict resolver function | No | `null` |
+| `verbose` | Enable detailed logging | No | `false` |
+
+## DatabaseOptions
+
+```dart
+final databaseOptions = DatabaseOptions(
+  
+);
+```
+
+### Parameters
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|----------|---------|
+| `version` | The database version number | No | `1` |
+| `dbPath` | Path to the SQLite database file | Yes | - |
+| `onCreate` | Callback function called when database is first created | Yes | - |
+| `onConfigure` | Callback function to configure the database | No | `null` |
+| `onUpgrade` | Callback function to handle database version upgrades | No | `null` |
+| `onDowngrade` | Callback function to handle database version downgrades | No | `null` |
+| `onOpen` | Callback function called when database is opened | No | `null` |

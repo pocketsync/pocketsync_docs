@@ -1,0 +1,55 @@
+---
+title: PocketSyncDatabase
+description: "PocketSyncDatabase is a wrapper around SQLite database that provides a simple and efficient way to store and sync data across devices."
+---
+
+PocketSyncDatabase is initialized with PocketSync instance. You can access it via `PocketSync.instance.database`.
+
+In our Flutter SDK, PocketSyncDatabase is a wrapper around [sqflite](https://pub.dev/packages/sqflite) database.
+Our Typescript SDK (planned) will use [sql.js](https://github.com/sql-js/sql.js).
+
+```dart
+final db = PocketSync.instance.database;
+```
+
+## Database Options
+
+PocketSyncDatabase requires configuration options to properly initialize and manage your SQLite database.
+
+| Parameter | Description | Required | Default |
+|-----------|-------------|----------|---------|
+| `version` | The database version number | No | `1` |
+| `dbPath` | Path to the SQLite database file | Yes | - |
+| `onCreate` | Callback function called when database is first created | Yes | - |
+| `onConfigure` | Callback function to configure the database | No | `null` |
+| `onUpgrade` | Callback function to handle database version upgrades | No | `null` |
+| `onDowngrade` | Callback function to handle database version downgrades | No | `null` |
+| `onOpen` | Callback function called when database is opened | No | `null` |
+
+### Example
+
+```dart
+final db = PocketSync.initialize(
+    options: PocketSyncOptions(
+      projectId: 'your-project-id',
+      authToken: 'your-auth-token',
+      serverUrl: 'https://api.pocketsync.dev',
+    ),
+    databaseOptions: DatabaseOptions(
+    version: 1,
+    dbPath: 'path/to/database.db',
+    onCreate: (db, version) {
+      // Create tables
+    },
+    onUpgrade: (db, oldVersion, newVersion) {
+      // Handle database upgrade
+    },
+    onDowngrade: (db, oldVersion, newVersion) {
+      // Handle database downgrade
+    },
+    onOpen: (db) {
+      // Handle database open
+    },
+  ),
+);
+```

@@ -9,24 +9,40 @@ description: "Get started with PocketSync in your Flutter application"
 
 - A PocketSync account (sign up at [pocketsync.dev](https://pocketsync.dev))
 
-### Add Dependency
+#### Our SDKs
 
-Add PocketSync to your `pubspec.yaml` file:
+<CardGroup cols={2}>
+  <Card
+    title="Flutter SDK"
+    icon="flutter"
+    href="https://pub.dev/packages/pocketsync_flutter"
+  />
+  <Card
+    title="Typescript SDK (planned)"
+    icon="globe"
+    href="https://pocketsync.dev"
+  />
+</CardGroup>
 
-```yaml
-dependencies:
-  pocketsync_flutter: ^0.0.11
-```
+### Add dependency
 
-Or install via command line:
+<Tabs>
+  <Tab title="pubspec.yaml">
+    ```yaml
+    dependencies:
+      pocketsync_flutter: ^0.3.0
+    ```
+  </Tab>
+  <Tab title="Command line">
+    ```bash
+    flutter pub add pocketsync_flutter
+    ```
+  </Tab>
+</Tabs>
 
-```bash
-flutter pub add pocketsync_flutter
-```
+### Basic setup
 
-### Basic Setup
-
-1. Create a project in the PocketSync console
+1. Create a project in the [PocketSync console](https://pocketsync.dev)
 2. Initialize PocketSync in your app:
 
 ```dart
@@ -58,85 +74,49 @@ void main() async {
 
 ## Configuration
 
-### Database Schema
+PocketSync can be configured with various options to customize its behavior. The `PocketSyncOptions` class accepts the following parameters:
 
-When designing your database schema, follow these best practices:
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `projectId` | Your project ID from the PocketSync dashboard | Required |
+| `authToken` | Authentication token from the PocketSync dashboard | Required |
+| `serverUrl` | PocketSync server URL | `https://api.pocketsync.dev` |
+| `changeLogRetentionDays` | Number of days to retain change logs | 30 |
+| `syncExistingData` | Whether to sync existing data | `true` |
+| `conflictResolutionStrategy` | Strategy for resolving conflicts | `lastWriteWins` |
+| `customResolver` | Custom conflict resolver function | `null` |
+| `verbose` | Enable detailed logging | `false` |
 
-```dart
-// In your database initialization
-await db.execute('''
-  CREATE TABLE todos (
-    id TEXT PRIMARY KEY NOT NULL, // Use UUID instead of auto-increment
-    title TEXT NOT NULL,
-    is_completed INTEGER NOT NULL DEFAULT 0,
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL
-  )
-''');
-```
-
-Key points:
-- Use UUIDs for primary keys
-- Include timestamp fields for sync optimization
-- Use appropriate data types for each column
-
-### Basic Operations
+Example configuration with custom options:
 
 ```dart
-// Get database instance
-final db = PocketSync.instance.database;
-
-// Insert data
-await db.insert('todos', {
-  'id': const Uuid().v4(),
-  'title': 'Buy groceries',
-  'is_completed': 0,
-  'created_at': DateTime.now().millisecondsSinceEpoch,
-  'updated_at': DateTime.now().millisecondsSinceEpoch,
-});
-
-// Query data
-final todos = await db.query('todos',
-  where: 'is_completed = ?',
-  whereArgs: [0],
-);
-
-// Update data
-await db.update('todos',
-  {'is_completed': 1},
-  where: 'id = ?',
-  whereArgs: ['todo-123'],
-);
-
-// Delete data
-await db.delete('todos',
-  where: 'id = ?',
-  whereArgs: ['todo-123'],
-);
-```
-
-### Watch for Changes
-
-PocketSync provides a powerful watch API to monitor database changes:
-
-```dart
-// Watch all todos
-final todosStream = db.watch('SELECT * FROM todos');
-
-// Use in StreamBuilder
-StreamBuilder<List<Map<String, dynamic>>>(
-  stream: todosStream,
-  builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      return ListView.builder(
-        itemCount: snapshot.data!.length,
-        itemBuilder: (context, index) => TodoItem(todo: snapshot.data![index]),
-      );
-    }
-    return const CircularProgressIndicator();
+final options = PocketSyncOptions(
+  projectId: 'your-project-id',
+  authToken: 'your-auth-token',
+  serverUrl: 'https://api.pocketsync.dev',
+  changeLogRetentionDays: 60,
+  syncExistingData: true,
+  conflictResolutionStrategy: ConflictResolutionStrategy.custom,
+  customResolver: (localChange, remoteChange) {
+    // Your custom conflict resolution logic
+    return localChange;
   },
+  verbose: true,
 );
 ```
+
+## Start sync
+
+- Call `PocketSync.instance.start()` to start the sync process.
+- Call `PocketSync.instance.stop()` to stop the sync process.
+- Make sure to call `PocketSync.instance.setUserId(userId: 'user-123')` before starting the sync process. This is required to identify the user and track their changes.
+
+### Device id generation
+
+PocketSync will automatically generate a unique device identifier for your app. This identifier is used to track changes made by the user on this device. There are some known limitations with device id generation on iOS:
+- If the app is uninstalled and reinstalled, the device id will change.
+- If the app is deleted and reinstalled, the device id will change.
+- If the app is deleted and reinstalled, the device id will change.
 
 ## Next Steps
 
