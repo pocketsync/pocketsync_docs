@@ -1,13 +1,24 @@
 ---
 title: Usage
-description: "How to use PocketSyncDatabase"
+description: "Guides for using PocketSyncDatabase"
 ---
+
+## PocketSyncDatabase
+
+In our Flutter SDK, PocketSyncDatabase is a wrapper around [sqflite](https://pub.dev/packages/sqflite) database.
+Our Typescript SDK (planned) will use [sql.js](https://github.com/sql-js/sql.js).
 
 ## Usage
 
+PocketSyncDatabase is initialized with PocketSync instance. You can access it via `PocketSync.instance.database`.
+
+```dart
+final db = PocketSync.instance.database;
+```
+
 ### CRUD Operations
 
-PocketSyncDatabase provides simple methods for performing CRUD (Create, Read, Update, Delete) operations on your data.
+`PocketSyncDatabase` provides simple methods for performing CRUD (Create, Read, Update, Delete) operations on your data.
 
 #### Create
 
