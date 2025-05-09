@@ -8,6 +8,22 @@ description: "Common issues, error codes, and solutions for PocketSync"
 ### Connection issues
 
 <AccordionGroup>
+  <Accordion title="Nothing happens when I start sync">
+    **Symptoms**: 
+    - PocketSync initializes without errors
+    - No sync operations occur
+    
+    **Possible causes**:
+    - Sync not started
+    - No user ID set
+    - No tables configured for sync
+    - No data changes detected
+    
+    **Solutions**:
+    1. Verify that `PocketSync.instance.start()` was called
+    2. Make sure `setUserId` was called before starting sync
+  </Accordion>
+
   <Accordion title="Cannot connect to PocketSync server">
     **Symptoms**: 
     - Sync operations fail with network errors
