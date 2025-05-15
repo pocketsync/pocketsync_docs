@@ -22,10 +22,49 @@ PocketSyncDatabase requires configuration options to properly initialize and man
 | `onUpgrade` | Callback function to handle database version upgrades | No | `null` |
 | `onDowngrade` | Callback function to handle database version downgrades | No | `null` |
 | `onOpen` | Callback function called when database is opened | No | `null` |
+| `schema` | Database schema | No | `null` |
 
 ### Example
 
 ```dart
+final todosTable = TableSchema(
+  name: 'todos',
+  columns: [
+    TableColumn.primaryKey(
+      name: 'id',
+      type: ColumnType.integer,
+      isAutoIncrement: true,
+    ),
+    TableColumn.text(
+      name: 'title',
+      isNullable: false,
+    ),
+    TableColumn.boolean(
+      name: 'completed',
+      defaultValue: false,
+    ),
+    TableColumn.datetime(
+      name: 'created_at',
+      isNullable: false,
+    ),
+    TableColumn.foreignKey(
+      name: 'user_id',
+      type: ColumnType.integer,
+      references: TableReference(
+        table: 'users',
+        column: 'id',
+        onDelete: 'CASCADE',
+      ),
+      isNullable: false,
+    ),
+  ],
+  indexes: [
+    Index(
+      name: 'idx_todos_title',
+      columns: ['title'],
+    ),
+  ],
+);
 final db = PocketSync.initialize(
     options: PocketSyncOptions(
       projectId: 'your-project-id',
@@ -35,6 +74,9 @@ final db = PocketSync.initialize(
     databaseOptions: DatabaseOptions(
     version: 1,
     dbPath: 'path/to/database.db',
+    schema: DatabaseSchema(
+      tables: [todosTable],
+    ),
     onCreate: (db, version) {
       // Create tables
     },

@@ -60,17 +60,18 @@
             ]
           },
           {
+            "group": "Database",
+            "pages": [
+              "database/schema",
+              "database/usage",
+              "database/pocket-sync-database"
+            ]
+          },
+          {
             "group": "SDK Reference",
             "pages": [
               "sdk/configuration",
               "sdk/methods"
-            ]
-          },
-          {
-            "group": "Database",
-            "pages": [
-              "database/usage",
-              "database/pocket-sync-database"
             ]
           },
           {

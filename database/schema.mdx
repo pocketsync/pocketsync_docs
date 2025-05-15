@@ -1,0 +1,259 @@
+---
+title: Database Schema
+description: "Define and manage your database schema using PocketSync's schema classes"
+---
+
+PocketSync provides a set of classes to define and manage your database schema in a type-safe way. This approach gives you better control over your database structure and helps prevent errors.
+
+## Overview
+
+The schema system allows you to:
+
+- Define table structures with strongly-typed columns
+- Create indexes for better query performance
+- Define relationships between tables
+- Generate SQL statements for creating tables and indexes
+
+## Core components
+
+### ColumnType
+
+An enum representing the supported data types for database columns.
+
+```dart
+enum ColumnType {
+  /// Text data type.
+  text,
+
+  /// Integer data type.
+  integer,
+
+  /// Real (floating point) data type.
+  real,
+
+  /// Binary large object data type.
+  blob,
+
+  /// Boolean data type (stored as INTEGER in SQLite).
+  boolean,
+
+  /// Date time data type (stored as INTEGER timestamp in SQLite).
+  datetime,
+}
+```
+
+### TableColumn
+
+Represents a column in a database table with its properties and constraints.
+
+```dart
+// Create a primary key column
+final idColumn = TableColumn.primaryKey(
+  name: 'id',
+  type: ColumnType.integer,
+  isAutoIncrement: true,
+);
+
+// Create a text column
+final titleColumn = TableColumn.text(
+  name: 'title',
+  isNullable: false,
+);
+
+// Create a boolean column
+final completedColumn = TableColumn.boolean(
+  name: 'completed',
+  defaultValue: false,
+);
+
+// Create a datetime column
+final createdAtColumn = TableColumn.datetime(
+  name: 'created_at',
+  isNullable: false,
+);
+```
+
+#### Factory constructors
+
+`TableColumn` provides several factory constructors for creating columns of different types:
+
+| Constructor | Description |
+|-------------|-------------|
+| `TableColumn.primaryKey()` | Creates a primary key column |
+| `TableColumn.text()` | Creates a text column |
+| `TableColumn.integer()` | Creates an integer column |
+| `TableColumn.real()` | Creates a real (floating point) column |
+| `TableColumn.boolean()` | Creates a boolean column (stored as INTEGER) |
+| `TableColumn.blob()` | Creates a blob column |
+| `TableColumn.datetime()` | Creates a datetime column (stored as INTEGER timestamp) |
+| `TableColumn.foreignKey()` | Creates a foreign key column |
+
+### TableReference
+
+Represents a reference to another table and column, used for defining foreign keys.
+
+```dart
+// Create a reference to the users table
+final userReference = TableReference(
+  table: 'users',
+  column: 'id',
+  onDelete: 'CASCADE',
+);
+
+// Create a foreign key column
+final userIdColumn = TableColumn.foreignKey(
+  name: 'user_id',
+  type: ColumnType.integer,
+  references: userReference,
+  isNullable: false,
+);
+```
+
+### Index
+
+Represents an index on a database table for improved query performance.
+
+```dart
+// Create a simple index
+final titleIndex = Index(
+  name: 'idx_todos_title',
+  columns: ['title'],
+);
+
+// Create a unique index
+final uniqueIndex = Index.unique(
+  name: 'idx_users_email',
+  columns: ['email'],
+);
+
+// Create an index with a WHERE clause
+final activeUsersIndex = Index(
+  name: 'idx_users_active',
+  columns: ['name', 'email'],
+  where: 'is_active = 1',
+);
+```
+
+### TableSchema
+
+Represents the schema for a database table, including its columns and indexes.
+
+```dart
+// Create a table schema
+final todosTable = TableSchema(
+  name: 'todos',
+  columns: [
+    TableColumn.primaryKey(
+      name: 'id',
+      type: ColumnType.integer,
+      isAutoIncrement: true,
+    ),
+    TableColumn.text(
+      name: 'title',
+      isNullable: false,
+    ),
+    TableColumn.boolean(
+      name: 'completed',
+      defaultValue: false,
+    ),
+    TableColumn.datetime(
+      name: 'created_at',
+      isNullable: false,
+    ),
+    TableColumn.foreignKey(
+      name: 'user_id',
+      type: ColumnType.integer,
+      references: TableReference(
+        table: 'users',
+        column: 'id',
+        onDelete: 'CASCADE',
+      ),
+      isNullable: false,
+    ),
+  ],
+  indexes: [
+    Index(
+      name: 'idx_todos_title',
+      columns: ['title'],
+    ),
+    Index(
+      name: 'idx_todos_user',
+      columns: ['user_id'],
+    ),
+  ],
+);
+```
+
+#### Virtual Tables
+
+SQLite supports virtual tables for special use cases like full-text search. You can create a virtual table schema using the `TableSchema.virtual()` constructor:
+
+```dart
+// Create a FTS5 virtual table for full-text search
+final searchTable = TableSchema.virtual(
+  name: 'todos_fts',
+  module: 'fts5',
+  moduleArgs: ['title', 'content'],
+);
+```
+
+### DatabaseSchema
+
+Represents the complete schema for a database, including all tables.
+
+```dart
+// Create a database schema
+final schema = DatabaseSchema(
+  tables: [
+    usersTable,
+    todosTable,
+    searchTable,
+  ],
+);
+
+// Get a table schema by name
+final table = schema.getTable('todos');
+```
+
+## Using schemas with PocketSync
+
+You can use the schema classes to define your database structure and generate SQL statements for creating tables and indexes:
+
+```dart
+final schema = DatabaseSchema(
+  tables: [
+    TableSchema(
+      name: 'todos',
+      columns: [
+        TableColumn.primaryKey(name: 'id', type: ColumnType.integer),
+        TableColumn.text(name: 'title'),
+        TableColumn.boolean(name: 'isCompleted'),
+      ],
+      indexes: [
+        Index(
+          name: 'idx_todos_title',
+          columns: ['title'],
+        ),
+      ],
+    ),
+  ],
+);
+
+final databaseOptions = DatabaseOptions(
+  version: 1,
+  dbPath: 'path/to/database.db',
+  schema: schema,
+);
+```
+
+## Best practices
+
+1. **Define schemas in a central location**: Keep all your table schemas in a dedicated file or class for better organization.
+
+2. **Use meaningful names**: Choose clear, descriptive names for tables, columns, and indexes.
+
+3. **Add indexes for frequently queried columns**: This improves query performance, especially for large tables.
+
+4. **Use foreign keys for relationships**: This helps maintain data integrity between related tables.
+
+5. **Consider using a repository pattern**: Combine schemas with a repository pattern for a clean, maintainable data access layer.

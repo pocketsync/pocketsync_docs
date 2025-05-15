@@ -64,7 +64,7 @@ void main() async {
       databaseOptions: databaseOptions,
     );
 
-    await PocketSync.instance.setUserId(userId: 'user-123');
+    PocketSync.instance.setUserId(userId: 'user-123');
     await PocketSync.instance.start();
   } catch (e) {
     print('Failed to initialize PocketSync: $e');
@@ -105,13 +105,13 @@ final options = PocketSyncOptions(
 );
 ```
 
-## Start sync
+## Sync management
 
 - Call `PocketSync.instance.start()` to start the sync process.
 - Call `PocketSync.instance.stop()` to stop the sync process.
 - Make sure to call `PocketSync.instance.setUserId(userId: 'user-123')` before starting the sync process. This is required to identify the user and track their changes.
 
-### Device id generation
+## Device id generation
 
 PocketSync will automatically generate a unique device identifier for your app. This identifier is used to track changes made by the user on this device. There are some known limitations with device id generation on iOS:
 - If the app is uninstalled and reinstalled, the device id will change.
